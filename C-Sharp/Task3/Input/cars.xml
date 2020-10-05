@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<cars>
+	<passengerCar model="Audi">
+		<number>OP1234-00</number>
+		<liftingCapacity>220</liftingCapacity>
+		<speed>250</speed>
+	</passengerCar>
+	
+	<passengerCar model="Porshe">
+		<number>EA9876-07</number>
+		<liftingCapacity>200</liftingCapacity>
+		<speed>320</speed>
+	</passengerCar>
+	
+	<passengerCar model="Sckoda">
+		<number>KU1254-05</number>
+		<liftingCapacity>150</liftingCapacity>
+		<speed>190</speed>
+	</passengerCar>
+	
+	<motorcycle model="Honda">
+		<number>EQ1234-06</number>
+		<liftingCapacity>80</liftingCapacity>
+		<speed>210</speed>
+		<hasSidecar>false</hasSidecar>
+	</motorcycle>
+	
+	<motorcycle model="KTM">
+		<number>LK1354-01</number>
+		<liftingCapacity>80</liftingCapacity>
+		<speed>240</speed>
+		<hasSidecar>true</hasSidecar>
+	</motorcycle>
+	
+	<truck model="Daf">
+		<number>LK7685-04</number>
+		<liftingCapacity>20000</liftingCapacity>
+		<speed>130</speed>
+		<hasTrailer>true</hasTrailer>
+	</truck>
+	
+	<truck model="Daf">
+		<number>KH7185-04</number>
+		<liftingCapacity>15000</liftingCapacity>
+		<speed>150</speed>
+		<hasTrailer>false</hasTrailer>
+	</truck>
+	
+</cars>
