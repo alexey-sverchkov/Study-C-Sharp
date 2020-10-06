@@ -1,0 +1,2 @@
+thIS IS text which IS replaced
+
