@@ -2,7 +2,7 @@
   "profiles": {
     "lab-02": {
       "commandName": "Project",
-      "commandLineArgs": "--qwe"
+      "commandLineArgs": "-l ivan.ivanov@mail.ru -p 1234"
     }
   }
 }
