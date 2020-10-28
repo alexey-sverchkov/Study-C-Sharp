@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "lab-02": {
+      "commandName": "Project",
+      "commandLineArgs": "--qwe"
+    }
+  }
+}
