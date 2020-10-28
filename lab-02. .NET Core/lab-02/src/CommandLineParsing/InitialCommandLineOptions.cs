@@ -5,7 +5,7 @@ using CommandLine;
 
 namespace lab_02.src
 {
-    public sealed class CommandLineOptions
+    public sealed class InitialCommandLineOptions
     {
         [Option('l', "login", Required = true, HelpText = "Login of user")]
         public String Username { get; set; }

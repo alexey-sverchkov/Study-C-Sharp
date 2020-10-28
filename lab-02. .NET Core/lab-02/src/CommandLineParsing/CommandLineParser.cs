@@ -7,12 +7,12 @@ namespace lab_02.src
 {
     public static class CommandLineParser
     {
-        public static CommandLineOptions ParseCommandLineArgs(this string[] args)
+        public static InitialCommandLineOptions ParseCommandLineArgs(this string[] args)
         {
-            var options = new CommandLineOptions();
+            var options = new InitialCommandLineOptions();
             var hasCommandLineErrors = false;
 
-            CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args)
+            CommandLine.Parser.Default.ParseArguments<InitialCommandLineOptions>(args)
                 .WithParsed(x =>
                 {
                     options.Username = x.Username;
