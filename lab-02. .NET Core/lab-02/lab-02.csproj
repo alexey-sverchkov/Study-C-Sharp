@@ -17,4 +17,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="users\" />
+    <Folder Include="src\Exceptions\" />
+  </ItemGroup>
+
 </Project>
