@@ -34,26 +34,29 @@ namespace lab_02
 
             String configUsername     = config["User:Login"];
             String configPassword     = config["User:Password"];
-            String configCreationDate = config["User:Creation Date"];            
-        
+            String configCreationDate = config["User:Creation Date"];
 
-            // input login of user is unknown
-            if (!parsedUsername.Equals(configUsername))
+
+            // validate username and password
+
+            UserAuthenticationManager authenticator = new UserAuthenticationManager();
+            authenticator.AddUser(new User(configUsername, configPassword, DateTime.Parse(configCreationDate)));           
+
+            if (!authenticator.isUserExists(parsedUsername))
             {
                 Console.WriteLine($"Error: User {parsedUsername} is not found!");
                 return;
             }
 
-            if (!parsedPassword.Equals(configPassword))
+            if (!authenticator.isPasswordCorrect(parsedUsername, parsedPassword))
             {
                 Console.WriteLine($"Error: Input password of user: {parsedUsername} is not correct!");
                 return;
             }
-
-            DateTime creationDate = DateTime.Parse(configCreationDate);
+            
 
             // create user
-            User user = new User(configUsername, configPassword, creationDate);
+            User user = new User(configUsername, configPassword, DateTime.Parse(configCreationDate));
 
             Console.WriteLine("Successfully logged in!");
          
