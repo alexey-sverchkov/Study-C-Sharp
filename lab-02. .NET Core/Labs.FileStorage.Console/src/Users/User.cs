@@ -6,7 +6,7 @@ using System.Text;
 
 namespace lab_02.src.Users
 {
-    class User
+    public class User
     {
         public String   Login { get; set; }
         public String   Password { get; set; }
