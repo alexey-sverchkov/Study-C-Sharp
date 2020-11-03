@@ -40,8 +40,7 @@ namespace lab_02.src.Users
             CreationDate = creationDate;
             
             // get used storage
-            DirectoryInfo directoryInfo = new DirectoryInfo("../../../users/");
-            Console.WriteLine(directoryInfo.FullName.ToString());
+            DirectoryInfo directoryInfo = new DirectoryInfo("../../../users/");            
             DirectoryInfo[] subDirectories = directoryInfo.GetDirectories();            
 
             bool isUserDirectoryExists = false; // user folder doesn't exist 
