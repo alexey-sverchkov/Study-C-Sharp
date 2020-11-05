@@ -11,7 +11,7 @@ namespace lab_02.src.Files
         public  String   Extension { get; set; }
 
         private ulong    size;
-        public  ulong    Size {
+        public  ulong    SizeInBytes {
             get
             {
                 return size;
@@ -29,6 +29,22 @@ namespace lab_02.src.Files
                 }
             }
         }
+        public  double   SizeInKilobytes
+        {
+            get
+            {
+                return (double)size / 1024;
+            }
+        }
+
+        public  double   SizeInMegabytes
+        {
+            get
+            {
+                return SizeInKilobytes / 1024;
+            }
+        }
+
         public  DateTime CreationDate { get; set; }
 
         private uint     downloadsNumber = 0;
@@ -53,11 +69,11 @@ namespace lab_02.src.Files
         }
 
         // constructors
-        public FileMetainformation(String name, String extension, ulong size, DateTime creationDate)
+        public FileMetainformation(String name, String extension, ulong sizeInBytes, DateTime creationDate)
         {
             Name = name;
             Extension = extension;
-            Size = size;
+            SizeInBytes = sizeInBytes;
             CreationDate = creationDate;
         }
 
@@ -67,7 +83,7 @@ namespace lab_02.src.Files
         {
             return $"FileMetainformation [ name: {Name}, " +
                                          $"extension: {Extension}, " +
-                                         $"size: {Size}, " + $"creation date: {CreationDate.ToString("F")}" +
+                                         $"size: {SizeInBytes} bytes, " + $"creation date: {CreationDate.ToString("F")}" +
                                          $"number of downloads: {DownloadsNumber}";
         }
     }
