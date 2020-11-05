@@ -70,7 +70,7 @@ namespace lab_02
             {
                 FilesManager fm = new FilesManager();
                 List<FileMetainformation> allFilesMetainformation = (List<FileMetainformation>)fm.GetMetainformationFromFile(pathOfDatabase);
-                fileStorage = new FileStorage(allFilesMetainformation);
+                fileStorage = new FileStorage(allFilesMetainformation); // create file storage
             }
             catch(Exception ex)
             {
