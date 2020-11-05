@@ -8,6 +8,7 @@ namespace lab_02.src.Users
 {
     public class User
     {
+        /* properties and fields  */
         public String   Login { get; set; }
         public String   Password { get; set; }
         public DateTime CreationDate { get; }
@@ -29,10 +30,11 @@ namespace lab_02.src.Users
                 }
             }
         }
-
         public DirectoryInfo UserDirectory { get; }
 
-        // ctors
+
+
+        /* constructors */
         public User(string login, string password, DateTime creationDate)
         {
             Login = login;
