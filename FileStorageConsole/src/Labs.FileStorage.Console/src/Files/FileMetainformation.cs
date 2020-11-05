@@ -4,6 +4,7 @@ using System.Text;
 
 namespace lab_02.src.Files
 {
+    [Serializable]
     public class FileMetainformation
     {
         // properties with fields
