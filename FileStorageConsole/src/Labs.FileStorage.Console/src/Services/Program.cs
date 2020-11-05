@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Configuration;
 
 namespace lab_02
 {
@@ -57,9 +58,11 @@ namespace lab_02
 
             // create user
             User user = new User(configUsername, configPassword, DateTime.Parse(configCreationDate));
-
             Console.WriteLine("Successfully logged in!");
-         
+
+
+            String pathOfDatabase = ConfigurationManager.AppSettings["databaseLocation"];           
+
 
             // program loop
             String currentCommand = null;
