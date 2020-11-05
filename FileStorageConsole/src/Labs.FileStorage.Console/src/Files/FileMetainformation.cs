@@ -84,7 +84,7 @@ namespace lab_02.src.Files
         {
             return $"FileMetainformation [ name: {Name}, " +
                                          $"extension: {Extension}, " +
-                                         $"size: {SizeInBytes} bytes, " + $"creation date: {CreationDate.ToString("F")}" +
+                                         $"size: {SizeInBytes} bytes, " + $"creation date: {CreationDate.ToString("F")}, " +
                                          $"number of downloads: {DownloadsNumber}";
         }
     }

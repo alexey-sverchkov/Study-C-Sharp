@@ -5,7 +5,7 @@ using System.Text;
 
 namespace lab_02.src.Files
 {
-    public class ExtendedFileInfo
+    public class ExtendedFileInfo 
     {
         /* Properties */
         public FileInfo FileContent { get; set; }

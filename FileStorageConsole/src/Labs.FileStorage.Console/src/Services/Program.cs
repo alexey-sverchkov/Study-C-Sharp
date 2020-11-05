@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Configuration;
+using lab_02.src.Files;
 
 namespace lab_02
 {
@@ -61,7 +62,21 @@ namespace lab_02
             Console.WriteLine("Successfully logged in!");
 
 
-            String pathOfDatabase = ConfigurationManager.AppSettings["databaseLocation"];           
+            // get path of database and read all metainformation from database file
+            String pathOfDatabase = ConfigurationManager.AppSettings["databaseLocation"];
+
+            FileStorage fileStorage = null;
+            try
+            {
+                FilesManager fm = new FilesManager();
+                List<FileMetainformation> allFilesMetainformation = (List<FileMetainformation>)fm.GetMetainformationFromFile(pathOfDatabase);
+                fileStorage = new FileStorage(allFilesMetainformation);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }                    
 
 
             // program loop
