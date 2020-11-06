@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
-namespace lab_02.src.Users
+namespace lab_02.Users
 {
     public class User
     {
@@ -16,7 +14,7 @@ namespace lab_02.src.Users
         private long storageUsed;
         public  long StorageUsed
         {
-            get { return storageUsed; }
+            get => storageUsed;
             set
             {
                 if (value < 0)
@@ -41,6 +39,7 @@ namespace lab_02.src.Users
             Password = password;
             CreationDate = creationDate;
             
+            // REVIEW: Directory should come from configurations appsettins not hardcoded
             // get used storage
             DirectoryInfo directoryInfo = new DirectoryInfo("../../../users/");            
             DirectoryInfo[] subDirectories = directoryInfo.GetDirectories();            
@@ -67,7 +66,5 @@ namespace lab_02.src.Users
                 StorageUsed = 0;
             }
         }
-        
-
     }
 }

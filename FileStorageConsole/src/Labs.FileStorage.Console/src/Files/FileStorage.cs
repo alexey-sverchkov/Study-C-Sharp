@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-namespace lab_02.src.Files
+namespace lab_02.Files
 {
     public class FileStorage
     {
         /* Properties and Fields */
-        private List<ExtendedFileInfo> files;
-        
-        
+        private readonly List<ExtendedFileInfo> files;
+
         /* Constructors */
         public FileStorage(List<FileMetainformation> filesMetainformation)
         {

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace lab_02.src.Files
+namespace lab_02.Files
 {
     [Serializable]
     public class FileMetainformation
@@ -11,12 +9,10 @@ namespace lab_02.src.Files
         public  String   Name { get; set; } // file name
         public  String   Extension { get; set; }
 
+        // REVIEW: ulong is always >= 0
         private ulong    size;
         public  ulong    SizeInBytes {
-            get
-            {
-                return size;
-            }
+            get => size;
             set
             {
                 if (value >= 0)
@@ -30,31 +26,17 @@ namespace lab_02.src.Files
                 }
             }
         }
-        public  double   SizeInKilobytes
-        {
-            get
-            {
-                return (double)size / 1024;
-            }
-        }
+        public  double   SizeInKilobytes => (double)size / 1024;
 
-        public  double   SizeInMegabytes
-        {
-            get
-            {
-                return SizeInKilobytes / 1024;
-            }
-        }
+        public  double   SizeInMegabytes => SizeInKilobytes / 1024;
 
         public  DateTime CreationDate { get; set; }
 
+        // REVIEW: the same
         private uint     downloadsNumber = 0;
         public  uint     DownloadsNumber
         {
-            get
-            {
-                return downloadsNumber;
-            }
+            get => downloadsNumber;
             set
             {
                 if (value >= 0)

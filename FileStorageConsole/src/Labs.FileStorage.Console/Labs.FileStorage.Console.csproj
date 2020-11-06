@@ -13,13 +13,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="src\Services\appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Folder Include="users\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="users\" />
+    <None Remove="src\appsettings.json" />
+    <Content Include="src\appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Update="database\database.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
