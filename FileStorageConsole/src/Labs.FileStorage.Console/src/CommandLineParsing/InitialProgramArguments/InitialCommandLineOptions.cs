@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CommandLine;
 
-namespace lab_02.src
+namespace lab_02.CommandLineParsing
 {
     public sealed class InitialCommandLineOptions
     {

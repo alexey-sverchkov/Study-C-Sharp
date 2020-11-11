@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
-namespace lab_02.src.Files
+namespace lab_02.Files
 {
     public class FilesManager
     {               
@@ -33,8 +32,8 @@ namespace lab_02.src.Files
             BinaryFormatter formatter = new BinaryFormatter();
             using (FileStream fs = new FileStream(filepath, FileMode.Open))
             {
-                ICollection<FileMetainformation> deserilizedMetainformation = (ICollection<FileMetainformation>)formatter.Deserialize(fs);
-                return deserilizedMetainformation;
+                ICollection<FileMetainformation> deserializedMetainformation = (ICollection<FileMetainformation>)formatter.Deserialize(fs);
+                return deserializedMetainformation;
             }            
         }
     }

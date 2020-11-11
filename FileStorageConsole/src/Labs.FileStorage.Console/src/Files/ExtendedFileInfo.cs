@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-namespace lab_02.src.Files
+namespace lab_02.Files
 {
     public class ExtendedFileInfo 
     {

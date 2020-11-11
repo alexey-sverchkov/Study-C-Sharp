@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace lab_02.src.Users
+namespace lab_02.Users
 {
     public class UserAuthenticationManager
     {
@@ -28,19 +27,15 @@ namespace lab_02.src.Users
             users.Add(user.Login, user);
         }      
 
-        public bool isUserExists(String username)
-        {        
-            if (users.ContainsKey(username))
-            {                
-                return true;
-            }
-            return false;
+        public bool IsUserExists(String username)
+        {
+            return users.ContainsKey(username);
         }
 
         // check for user, if exists - check for password correctness
-        public bool isPasswordCorrect(String username, String password)
+        public bool IsPasswordCorrect(String username, String password)
         {
-            if (isUserExists(username))
+            if (IsUserExists(username))
             {
                 String correctPassword = users[username].Password;
                 if (correctPassword.Equals(password))
@@ -50,7 +45,5 @@ namespace lab_02.src.Users
             }
             return false;
         }
-
-
     }
 }

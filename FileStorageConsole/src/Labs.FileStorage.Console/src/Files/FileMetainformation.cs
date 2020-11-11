@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 
-namespace lab_02.src.Files
+namespace lab_02.Files
 {
     [Serializable]
     public class FileMetainformation
@@ -10,64 +9,15 @@ namespace lab_02.src.Files
         // properties with fields
         public  String   Name { get; set; } // file name
         public  String   Extension { get; set; }
+                
+        public  ulong    SizeInBytes { get; set; }
+        public  double   SizeInKilobytes => (double)SizeInBytes / 1024;
 
-        private ulong    size;
-        public  ulong    SizeInBytes {
-            get
-            {
-                return size;
-            }
-            set
-            {
-                if (value >= 0)
-                {
-                    size = value;
-                }
-                else
-                {
-                    Console.WriteLine("Warning, size of file can't be less than zero");
-                    size = 0;
-                }
-            }
-        }
-        public  double   SizeInKilobytes
-        {
-            get
-            {
-                return (double)size / 1024;
-            }
-        }
-
-        public  double   SizeInMegabytes
-        {
-            get
-            {
-                return SizeInKilobytes / 1024;
-            }
-        }
+        public  double   SizeInMegabytes => SizeInKilobytes / 1024;
 
         public  DateTime CreationDate { get; set; }
-
-        private uint     downloadsNumber = 0;
-        public  uint     DownloadsNumber
-        {
-            get
-            {
-                return downloadsNumber;
-            }
-            set
-            {
-                if (value >= 0)
-                {
-                    downloadsNumber = value;
-                }
-                else
-                {
-                    Console.WriteLine("Warning, number of downloads of file can't be less than zero");
-                    downloadsNumber = 0;
-                }
-            }
-        }
+       
+        public uint DownloadsNumber { get; set; }
 
         // constructors
         public FileMetainformation(String name, String extension, ulong sizeInBytes, DateTime creationDate)
@@ -76,6 +26,14 @@ namespace lab_02.src.Files
             Extension = extension;
             SizeInBytes = sizeInBytes;
             CreationDate = creationDate;
+        }
+
+        public FileMetainformation(FileInfo file)
+        {
+            Name = file.Name;
+            Extension = file.Extension;
+            SizeInBytes = (ulong)file.Length;
+            CreationDate = file.CreationTime;
         }
 
 
