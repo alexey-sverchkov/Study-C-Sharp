@@ -32,9 +32,11 @@ namespace lab_02
                 .AddJsonFile("src/appsettings.json", true, true)
                 .Build();
 
-            String configUsername     = config["User:Login"];
-            String configPassword     = config["User:Password"];
-            String configCreationDate = config["User:Creation Date"];
+            String configUsername           = config["User:Login"];
+            String configPassword           = config["User:Password"];
+            String configCreationDate       = config["User:Creation Date"];
+            String configUsersDirectoryPath = config["Users Directory:Location"];
+            Console.WriteLine(configUsersDirectoryPath);
 
 
             // validate username and password
@@ -56,7 +58,7 @@ namespace lab_02
             
 
             // create user
-            User user = new User(configUsername, configPassword, DateTime.Parse(configCreationDate));
+            User user = new User(configUsername, configPassword, DateTime.Parse(configCreationDate), configUsersDirectoryPath);
             Console.WriteLine("Successfully logged in!");
 
 

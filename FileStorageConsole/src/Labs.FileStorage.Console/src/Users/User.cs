@@ -33,15 +33,14 @@ namespace lab_02.Users
 
 
         /* constructors */
-        public User(string login, string password, DateTime creationDate)
+        public User(string login, string password, DateTime creationDate, String usersDirectoryPath)
         {
             Login = login;
             Password = password;
             CreationDate = creationDate;
-            
-            // REVIEW: Directory should come from configurations appsettins not hardcoded
+                        
             // get used storage
-            DirectoryInfo directoryInfo = new DirectoryInfo("../../../users/");            
+            DirectoryInfo directoryInfo = new DirectoryInfo(usersDirectoryPath);            
             DirectoryInfo[] subDirectories = directoryInfo.GetDirectories();            
 
             bool isUserDirectoryExists = false; // user folder doesn't exist 
