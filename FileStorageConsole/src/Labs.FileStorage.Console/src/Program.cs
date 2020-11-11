@@ -6,6 +6,7 @@ using System.Configuration;
 using lab_02.CommandLineParsing;
 using lab_02.Files;
 using lab_02.Users;
+using lab_02.src.CommandLineParsing;
 
 namespace lab_02
 {
@@ -76,9 +77,7 @@ namespace lab_02
                 return;
             }                    
 
-
-            // REVIEW: there also, pls use another class for parsing command line.
-            // REVIEW: each command logic should be implemented in separate class, possible with the shared interface
+            
             // program loop
             String currentCommand = null;
             while(!(currentCommand = Console.ReadLine()).Equals("exit"))
@@ -86,19 +85,33 @@ namespace lab_02
                 String[] parameters = currentCommand.Split(" ");
                 switch (parameters[0])
                 {
-                    case ("user"):
-                        {
-                            // command: user info
-                            if (parameters.Length == 2 && parameters[1].Equals("info"))
+                    case ("User"):
+                        {                           
+                            try
                             {
-                                Console.WriteLine("login: " + user.Login);
-                                Console.WriteLine("creation Date: " + user.CreationDate.ToString("d")); // format: yyyy-mm-dd
-                                Console.WriteLine($"storage used: {fileStorage.GetSize()} bytes");
+                                var commandLinePattern = Command.WithType("User");
+                                var command = commandLinePattern.Parse(parameters);
+                                
+                                // command is user info - to get all staff from existing classes
+                                if (command.GetType().ToString().Equals("lab_02.src.CommandLineParsing.UserInfoCommand"))
+                                {
+                                    ((UserInfoCommand)command).Login = user.Login;
+                                    ((UserInfoCommand)command).CreationDate = user.CreationDate;
+                                    ((UserInfoCommand)command).StorageUsed = fileStorage.GetSize();
+                                }
+
+                                command.Run();
                             }
-                            else
+                            catch(FormatException ex)
                             {
-                                Console.WriteLine("Command is not found!");
+                                Console.WriteLine("Command not found!");
                             }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                Console.WriteLine(ex.StackTrace);
+                            }
+
                             break;
                         }
                     default:
