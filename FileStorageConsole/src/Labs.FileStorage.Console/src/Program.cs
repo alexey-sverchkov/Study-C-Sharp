@@ -35,8 +35,7 @@ namespace lab_02
             String configUsername           = config["User:Login"];
             String configPassword           = config["User:Password"];
             String configCreationDate       = config["User:Creation Date"];
-            String configUsersDirectoryPath = config["Users Directory:Location"];
-            Console.WriteLine(configUsersDirectoryPath);
+            String configUsersDirectoryPath = config["Users Directory:Location"];            
 
 
             // validate username and password
@@ -58,7 +57,7 @@ namespace lab_02
             
 
             // create user
-            User user = new User(configUsername, configPassword, DateTime.Parse(configCreationDate), configUsersDirectoryPath);
+            User user = new User(configUsername, configPassword, DateTime.Parse(configCreationDate));
             Console.WriteLine("Successfully logged in!");
 
 
@@ -68,9 +67,8 @@ namespace lab_02
             FileStorage fileStorage = null;
             try
             {
-                FilesManager fm = new FilesManager();
-                List<FileMetainformation> allFilesMetainformation = (List<FileMetainformation>)fm.GetMetainformationFromFile(pathOfDatabase);
-                fileStorage = new FileStorage(allFilesMetainformation); // create file storage
+                // create file storage
+                fileStorage = new FileStorage(user, configUsersDirectoryPath, pathOfDatabase);
             }
             catch(Exception ex)
             {
@@ -95,7 +93,7 @@ namespace lab_02
                             {
                                 Console.WriteLine("login: " + user.Login);
                                 Console.WriteLine("creation Date: " + user.CreationDate.ToString("d")); // format: yyyy-mm-dd
-                                Console.WriteLine($"storage used: {user.StorageUsed} bytes");
+                                Console.WriteLine($"storage used: {fileStorage.GetSize()} bytes");
                             }
                             else
                             {
