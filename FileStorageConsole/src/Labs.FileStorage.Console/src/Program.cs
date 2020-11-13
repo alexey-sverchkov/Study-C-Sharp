@@ -3,6 +3,8 @@ using System.Configuration;
 using System.IO;
 using Labs.FileStorage.Console.CommandLineParsing.Commands;
 using Labs.FileStorage.Console.CommandLineParsing.InitialProgramArguments;
+using Labs.FileStorage.Console.src;
+using Labs.FileStorage.Console.src.CommandLineParsing.Commands;
 using Labs.FileStorage.Console.Users;
 using Microsoft.Extensions.Configuration;
 
@@ -56,17 +58,20 @@ namespace Labs.FileStorage.Console
 
             // create user
             User user = new User(configUsername, configPassword, DateTime.Parse(configCreationDate));
+            ApplicationContext.User = user;
             System.Console.WriteLine("Successfully logged in!");
 
 
             // get path of database and read all metainformation from database file
             String pathOfDatabase = ConfigurationManager.AppSettings["databaseLocation"];
+         
 
             Files.FileStorage fileStorage = null;
             try
             {
                 // create file storage
                 fileStorage = new Files.FileStorage(user, configUsersDirectoryPath, pathOfDatabase);
+                ApplicationContext.FileStorage = fileStorage;
             }
             catch(Exception ex)
             {
@@ -84,21 +89,9 @@ namespace Labs.FileStorage.Console
                     case ("User"):
                         {                           
                             try
-                            {
-                                // Review: Better to use enum instead of hardcoded string
-                                var commandLinePattern = Command.WithType("User");
-                                
-                                // Review: Command should be constructed inside Parse method not below
-                                var command = commandLinePattern.Parse(parameters);
-                                
-                                // Review: move this logic inside Parse method
-                                // command is user info - to get all staff from existing classes
-                                if (command.GetType().ToString().Equals("lab_02.src.CommandLineParsing.UserInfoCommand"))
-                                {
-                                    ((UserInfoCommand)command).Login = user.Login;
-                                    ((UserInfoCommand)command).CreationDate = user.CreationDate;
-                                    ((UserInfoCommand)command).StorageUsed = fileStorage.GetSize();
-                                }
+                            {                                
+                                var commandLinePattern = CommandBuilder.BuildWithType(CommandType.User.ToString());                                                               
+                                var command = commandLinePattern.BuildFrom(parameters);                                                               
 
                                 command.Run();
                             }
