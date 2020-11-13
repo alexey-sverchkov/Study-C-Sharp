@@ -1,17 +1,30 @@
-﻿using System;
+using System;
+﻿using ByteSizeLib;
+using Labs.FileStorage.Console.Users;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
-using Labs.FileStorage.Console.Users;
 
 namespace Labs.FileStorage.Console.Files
 {
     public class FileStorage
     {
-        /* Properties and Fields */
-        private readonly List<ExtendedFileInfo> files = new List<ExtendedFileInfo>();
+        public static readonly ByteSize MAX_FILE_SIZE;     // max file size in bytes
+        public static readonly ByteSize STORAGE_CAPACITY;  // total capacity of user storage
 
-        /* Constructors */       
+        /* Properties and Fields */
+        private readonly HashSet<ExtendedFileInfo> files = new HashSet<ExtendedFileInfo>();
+
+        /* Constructors */
+
+        static FileStorage()
+        {
+            String maxFileSizeStr     = ConfigurationManager.AppSettings["storageMaxFileSize"];
+            String storageCapacityStr = ConfigurationManager.AppSettings["storageCapacity"];
+            MAX_FILE_SIZE = ByteSize.Parse(maxFileSizeStr);            
+            STORAGE_CAPACITY = ByteSize.Parse(storageCapacityStr);            
+        }
 
         public FileStorage(User user, String usersDirectoryPath, String databaseLocation)
         {
@@ -50,7 +63,7 @@ namespace Labs.FileStorage.Console.Files
         // returns used size of storage
         public ulong GetSize()
         {            
-            return (ulong)files.Sum(extendedFileInfo => (decimal)extendedFileInfo.Metainformation.SizeInBytes);            
+            return (ulong)files.Sum(extendedFileInfo => (decimal)extendedFileInfo.Metainformation.SizeInBytes);               
         }
     }
 }
