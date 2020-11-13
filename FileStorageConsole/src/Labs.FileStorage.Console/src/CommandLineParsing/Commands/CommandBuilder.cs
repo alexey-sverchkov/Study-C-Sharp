@@ -1,26 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using Labs.FileStorage.Console.src.CommandLineParsing;
+using Labs.FileStorage.Console.src.CommandLineParsing.Commands;
 
 namespace Labs.FileStorage.Console.CommandLineParsing.Commands
-{
-    // Review: Possibly should be renamed to CommandLineParser or CommandBuilder
-    public class CommandLinePattern
+{    
+    public class CommandBuilder
     {
         /* Properties */
-        public String Type { get; set; }
+        public String TypeOfCommand { get; set; }
         public String Name { get; set; }
         public List<String> Parameters { get; set; }        
 
 
         /* Methods */        
 
-        public CommandLinePattern HasParameter(String name)
+        public static CommandBuilder BuildWithType(String typeOfCommand)
+        {
+            return new CommandBuilder
+            {
+                TypeOfCommand = typeOfCommand,
+                Name = "",
+                Parameters = new List<String>(),
+            };
+        }        
+
+
+        public CommandBuilder HasParameter(String name)
         {
             Parameters.Add(name);
             return this;
         }
 
-        public virtual bool TryParse(String[] args, out ICommand result)
+        public virtual bool TryBuildFrom(String[] args, out ICommand result)
         {
             result = null;
             // pattern can't match an empty string
@@ -30,7 +42,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             }
 
             // pattern can't match some other command
-            if (!args[0].Equals(Type))
+            if (!args[0].Equals(TypeOfCommand))
             {
                 return false;
             }
@@ -41,11 +53,11 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             {
                 Parameters.Add(args[i]);
             }
-
-            // Review: Interesting but you can use switch case there no need to use reflection, but solution is ok
-            // for command with certain type and name try to find corresponding class
-            var className =  "lab_02.src.CommandLineParsing." + Type + Name + "Command";
+            
+            // for command with certain type and name try to find corresponding class                      
+            var className = "Labs.FileStorage.Console.CommandLineParsing.Commands." + TypeOfCommand + Name + "Command";
             var type = System.Type.GetType(className);
+            
             
             // class not found
             if (type == null) return false;
@@ -58,9 +70,9 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             return true;
         }
 
-        public virtual ICommand Parse(String[] args)
+        public virtual ICommand BuildFrom(String[] args)
         {
-            if (TryParse(args, out var result))
+            if (TryBuildFrom(args, out var result))
             {
                 return result;
             }
