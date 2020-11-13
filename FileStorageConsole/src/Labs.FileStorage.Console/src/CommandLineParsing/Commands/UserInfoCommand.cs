@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Labs.FileStorage.Console.src;
+using System;
 
-namespace lab_02.src.CommandLineParsing
+namespace Labs.FileStorage.Console.CommandLineParsing.Commands
 {
     class UserInfoCommand : ICommand
-    {
-        public String   Login { get; set; }
-        public DateTime CreationDate { get; set; }
-        public ulong    StorageUsed { get; set; }
-
+    {        
         public void Run()
         {
-            Console.WriteLine("login: " + Login);
-            Console.WriteLine("creation Date: " + CreationDate.ToString("d")); // format: yyyy-mm-dd
-            Console.WriteLine("storage used: " + StorageUsed + " bytes");
+            System.Console.WriteLine("login: " + ApplicationContext.User.Login);
+            System.Console.WriteLine("creation Date: " + ApplicationContext.User.CreationDate.ToString("d")); // format: yyyy-mm-dd
+            System.Console.WriteLine("storage used: " + ApplicationContext.FileStorage.GetSize() + " bytes");
         }
     }
 }

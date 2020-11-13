@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace lab_02.Files
+namespace Labs.FileStorage.Console.Files
 {
     [Serializable]
     public class FileMetainformation

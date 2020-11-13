@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace lab_02.Users
+namespace Labs.FileStorage.Console.Users
 {
     public class UserAuthenticationManager
     {
-        private Dictionary<String, User> users = new Dictionary<string, User>(); //  key - username, value - user
-        
+        //  key - username, value - user
+        private readonly Dictionary<String, User> users = new Dictionary<string, User>();
 
         /* Constructors */
         public UserAuthenticationManager()
@@ -18,7 +18,6 @@ namespace lab_02.Users
         {
             this.users = users;
         }
-
 
         /* Methods  */
 

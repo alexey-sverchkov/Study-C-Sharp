@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace lab_02.Files
+namespace Labs.FileStorage.Console.Files
 {
     public class FilesManager
     {               
-
         /* Methods */
         public void WriteMetainformationToFile(FileMetainformation fileMetainformation, String filepath)
         {

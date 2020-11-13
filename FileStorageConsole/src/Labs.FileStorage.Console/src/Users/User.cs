@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 
-namespace lab_02.Users
+namespace Labs.FileStorage.Console.Users
 {
     public class User
     {
