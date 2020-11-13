@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace lab_02.CommandLineParsing
+namespace Labs.FileStorage.Console.CommandLineParsing.InitialProgramArguments
 {
     public static class CommandLineParser
     {
@@ -9,7 +9,7 @@ namespace lab_02.CommandLineParsing
             var options = new InitialCommandLineOptions();
             var hasCommandLineErrors = false;
 
-            CommandLine.Parser.Default.ParseArguments<InitialCommandLineOptions>(args)
+            Parser.Default.ParseArguments<InitialCommandLineOptions>(args)
                 .WithParsed(x =>
                 {
                     options.Username = x.Username;
@@ -17,12 +17,7 @@ namespace lab_02.CommandLineParsing
                 })
                 .WithNotParsed(_ => hasCommandLineErrors = true);
 
-            if (hasCommandLineErrors)
-            {
-                return null;
-            }
-
-            return options;
+            return hasCommandLineErrors ? null : options;
         }
     }
 }

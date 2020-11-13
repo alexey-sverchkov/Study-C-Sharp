@@ -1,7 +1,7 @@
 ﻿using System;
 using CommandLine;
 
-namespace lab_02.CommandLineParsing
+namespace Labs.FileStorage.Console.CommandLineParsing.InitialProgramArguments
 {
     public sealed class InitialCommandLineOptions
     {

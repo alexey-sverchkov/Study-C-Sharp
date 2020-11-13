@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace lab_02.src.CommandLineParsing
+namespace Labs.FileStorage.Console.CommandLineParsing.Commands
 {
     class UserInfoCommand : ICommand
     {
@@ -12,9 +10,9 @@ namespace lab_02.src.CommandLineParsing
 
         public void Run()
         {
-            Console.WriteLine("login: " + Login);
-            Console.WriteLine("creation Date: " + CreationDate.ToString("d")); // format: yyyy-mm-dd
-            Console.WriteLine("storage used: " + StorageUsed + " bytes");
+            System.Console.WriteLine("login: " + Login);
+            System.Console.WriteLine("creation Date: " + CreationDate.ToString("d")); // format: yyyy-mm-dd
+            System.Console.WriteLine("storage used: " + StorageUsed + " bytes");
         }
     }
 }

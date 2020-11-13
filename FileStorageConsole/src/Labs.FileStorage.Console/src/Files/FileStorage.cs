@@ -1,10 +1,10 @@
-﻿using lab_02.Users;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Labs.FileStorage.Console.Users;
 
-namespace lab_02.Files
+namespace Labs.FileStorage.Console.Files
 {
     public class FileStorage
     {
@@ -17,14 +17,12 @@ namespace lab_02.Files
         {
             DirectoryInfo   directoryInfo = new DirectoryInfo(usersDirectoryPath);
             DirectoryInfo[] subDirectories = directoryInfo.GetDirectories();
-            DirectoryInfo userDirectory = null;
 
             bool isUserDirectoryExists = false; // user folder doesn't exist 
             foreach (DirectoryInfo currentSubDirectory in subDirectories)
             {
                 if (currentSubDirectory.Name.Equals(user.Login))
                 {
-                    userDirectory = currentSubDirectory;
                     isUserDirectoryExists = true;
                     break;
                 }
@@ -45,7 +43,6 @@ namespace lab_02.Files
                 // create new directory for user
                 directoryInfo.CreateSubdirectory(user.Login);
             }
-
         }
 
         /* Methods */
