@@ -14,7 +14,7 @@ namespace Labs.FileStorage.Console.Files
         public static readonly ByteSize STORAGE_CAPACITY;  // total capacity of user storage
 
         /* Properties and Fields */
-        private readonly HashSet<ExtendedFileInfo> files = new HashSet<ExtendedFileInfo>();
+        private readonly Dictionary<String, ExtendedFileInfo> files = new Dictionary<String, ExtendedFileInfo>();
 
         /* Constructors */
 
@@ -48,7 +48,7 @@ namespace Labs.FileStorage.Console.Files
                 foreach (FileMetainformation fileMetainfo in filesMetainfo)
                 {
                     FileInfo file = new FileInfo(fileMetainfo.Name + "." + fileMetainfo.Extension);
-                    this.files.Add(new ExtendedFileInfo(file, fileMetainfo));
+                    this.files.Add(file.Name, new ExtendedFileInfo(file, fileMetainfo));
                 }
             }
             else
@@ -62,8 +62,9 @@ namespace Labs.FileStorage.Console.Files
         
         // returns used size of storage
         public ulong GetSize()
-        {            
-            return (ulong)files.Sum(extendedFileInfo => (decimal)extendedFileInfo.Metainformation.SizeInBytes);               
+        {               
+            // pair - <String, ExtendedFileInfo>
+            return (ulong)files.Sum(pair => (decimal)pair.Value.Metainformation.SizeInBytes);
         }
     }
 }
