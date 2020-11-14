@@ -13,7 +13,7 @@ namespace Labs.FileStorage.Console.Files
         public  ulong    SizeInBytes { get; set; }
         public  double   SizeInKilobytes => (double)SizeInBytes / 1024;
 
-        public  double   SizeInMegabytes => SizeInKilobytes / 1024;
+        public  double   SizeInMegabytes => SizeInKilobytes / 1024;        
 
         public  DateTime CreationDate { get; set; }
        
@@ -44,6 +44,37 @@ namespace Labs.FileStorage.Console.Files
                                          $"extension: {Extension}, " +
                                          $"size: {SizeInBytes} bytes, " + $"creation date: {CreationDate.ToString("F")}, " +
                                          $"number of downloads: {DownloadsNumber}";
+        }                
+
+        // prints metainformation
+        // @params:
+        // type: 's' - short, includes name, extension and size
+        // type: 'f' - full,  includes name, extension, size, creation date and number of downloads 
+        public void Print(char type)
+        {
+            switch (type)
+            {
+                case 's':
+                    {
+                        System.Console.WriteLine($"- file name: {Name}");
+                        System.Console.WriteLine($"- file extension: {Extension}");
+                        System.Console.WriteLine($"- file size: {SizeInBytes} bytes");
+                        break;
+                    }
+                case 'f':
+                    {
+                        System.Console.WriteLine($"- file name: {Name}");
+                        System.Console.WriteLine($"- file extension: {Extension}");
+                        System.Console.WriteLine($"- file size: {SizeInBytes} bytes");
+                        System.Console.WriteLine($"- creation date: {CreationDate.ToString("F")}");
+                        System.Console.WriteLine($"- number of downloads: {DownloadsNumber}");
+                        break;
+                    }
+                default:
+                    {
+                        throw new FormatException($"Error: type {type} is unknown to use Print()");                        
+                    }
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Labs.FileStorage.Console.Files
 
         /* Properties and Fields */
         private readonly Dictionary<String, ExtendedFileInfo> files = new Dictionary<String, ExtendedFileInfo>();
-
+        private readonly User user;                           
         /* Constructors */
 
         static FileStorage()
@@ -28,6 +28,7 @@ namespace Labs.FileStorage.Console.Files
 
         public FileStorage(User user, String usersDirectoryPath, String databaseLocation)
         {
+            this.user = user;
             DirectoryInfo   directoryInfo = new DirectoryInfo(usersDirectoryPath);
             DirectoryInfo[] subDirectories = directoryInfo.GetDirectories();
 
@@ -36,14 +37,15 @@ namespace Labs.FileStorage.Console.Files
             {
                 if (currentSubDirectory.Name.Equals(user.Login))
                 {
+                    this.user.DirectoryPath = currentSubDirectory.FullName;
                     isUserDirectoryExists = true;
                     break;
                 }
             }
 
             if (isUserDirectoryExists)
-            {                
-                FilesManager fm = new FilesManager();
+            {
+                FileManager fm = new FileManager();
                 ICollection<FileMetainformation> filesMetainfo = fm.GetMetainformationFromFile(databaseLocation);
                 foreach (FileMetainformation fileMetainfo in filesMetainfo)
                 {
@@ -54,7 +56,8 @@ namespace Labs.FileStorage.Console.Files
             else
             {
                 // create new directory for user
-                directoryInfo.CreateSubdirectory(user.Login);
+                DirectoryInfo newUserDirectory = directoryInfo.CreateSubdirectory(user.Login);
+                this.user.DirectoryPath = newUserDirectory.FullName;
             }
         }
 
@@ -66,5 +69,17 @@ namespace Labs.FileStorage.Console.Files
             // pair - <String, ExtendedFileInfo>
             return (ulong)files.Sum(pair => (decimal)pair.Value.Metainformation.SizeInBytes);
         }
+        
+        public bool Contains(FileInfo file)
+        {
+            return files.ContainsKey(file.Name);
+        }
+
+        public void Add(FileInfo file)
+        {
+            files.Add(file.Name, new ExtendedFileInfo(file, new FileMetainformation(file)));            
+            File.Create(user.DirectoryPath + "\\" +  file.Name);
+            // TODO: add creating file in database.bin
+        }        
     }
 }

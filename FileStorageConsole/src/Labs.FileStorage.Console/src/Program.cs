@@ -107,6 +107,27 @@ namespace Labs.FileStorage.Console
 
                             break;
                         }
+                    case ("File"):
+                        {
+                            try
+                            {
+                                var commandLinePattern = CommandBuilder.BuildWithType(CommandType.File.ToString());
+                                var command = commandLinePattern.BuildFrom(parameters);
+
+                                command.Run();
+                            }
+                            catch (FormatException ex)
+                            {
+                                System.Console.WriteLine("Command not found!");
+                            }
+                            catch (Exception ex)
+                            {
+                                System.Console.WriteLine(ex.Message);
+                                System.Console.WriteLine(ex.StackTrace);
+                            }
+
+                            break;
+                        }
                     default:
                         {
                             System.Console.WriteLine("Command is not found!");

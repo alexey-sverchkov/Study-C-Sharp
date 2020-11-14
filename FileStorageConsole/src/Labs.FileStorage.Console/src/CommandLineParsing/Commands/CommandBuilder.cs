@@ -49,6 +49,12 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
                         result = new UserInfoCommand();
                         break;
                     }
+                case ("File Upload"):
+                    {
+                        result = new FileUploadCommand();
+                        ((FileUploadCommand)result).PathToFile = args[2];
+                        break;
+                    }
                 default:
                     {
                         break;
