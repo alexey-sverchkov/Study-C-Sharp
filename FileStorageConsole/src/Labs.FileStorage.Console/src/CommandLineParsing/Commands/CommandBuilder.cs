@@ -9,8 +9,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
     {
         /* Properties */
         public String TypeOfCommand { get; set; }
-        public String Name { get; set; }
-        public List<String> Parameters { get; set; }        
+        public String Name { get; set; }          
 
 
         /* Methods */        
@@ -20,17 +19,10 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             return new CommandBuilder
             {
                 TypeOfCommand = typeOfCommand,
-                Name = "",
-                Parameters = new List<String>(),
+                Name = "",                
             };
         }        
-
-
-        public CommandBuilder HasParameter(String name)
-        {
-            Parameters.Add(name);
-            return this;
-        }
+       
 
         public virtual bool TryBuildFrom(String[] args, out ICommand result)
         {
@@ -47,25 +39,24 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
                 return false;
             }
 
-            Name = args[1];              
-
-            for(int i = 2; i < args.Length; ++i)
+            Name = args[1];                          
+            
+            // for command with certain type and name try to find corresponding class                                  
+            switch(TypeOfCommand + " " + Name)
             {
-                Parameters.Add(args[i]);
-            }
-            
-            // for command with certain type and name try to find corresponding class                      
-            var className = "Labs.FileStorage.Console.CommandLineParsing.Commands." + TypeOfCommand + Name + "Command";
-            var type = System.Type.GetType(className);
-            
+                case ("User Info"):
+                    {
+                        result = new UserInfoCommand();
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }                        
             
             // class not found
-            if (type == null) return false;
-
-            // create an instance
-            result = (ICommand)System.Activator.CreateInstance(type);
-
-            // TODO in future add parsing parameters
+            if (result == null) return false;                        
 
             return true;
         }
