@@ -55,6 +55,12 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
                         ((FileUploadCommand)result).PathToFile = args[2];
                         break;
                     }
+                case ("File Remove"):
+                    {
+                        result = new FileRemoveCommand();
+                        ((FileRemoveCommand)result).FileName = args[2];
+                        break;
+                    }
                 default:
                     {
                         break;

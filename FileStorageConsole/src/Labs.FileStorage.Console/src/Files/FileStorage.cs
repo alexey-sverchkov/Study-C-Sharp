@@ -6,6 +6,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using Labs.FileStorage.Console.src;
+using Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions;
 
 namespace Labs.FileStorage.Console.Files
 {
@@ -50,7 +51,7 @@ namespace Labs.FileStorage.Console.Files
                 ICollection<FileMetainformation> filesMetainfo = fm.GetMetainformationFromFile(databaseLocation);
                 foreach (FileMetainformation fileMetainfo in filesMetainfo)
                 {
-                    FileInfo file = new FileInfo(fileMetainfo.Name + "." + fileMetainfo.Extension);
+                    FileInfo file = new FileInfo(fileMetainfo.Name);
                     this.files.Add(file.Name, new ExtendedFileInfo(file, fileMetainfo));
                 }
             }
@@ -78,10 +79,32 @@ namespace Labs.FileStorage.Console.Files
 
         public void Add(FileInfo file)
         {
-            files.Add(file.Name, new ExtendedFileInfo(file, new FileMetainformation(file)));            
-            File.Create(user.DirectoryPath + "\\" +  file.Name);
-            ApplicationContext.Database.Update();
+            if (!Contains(file))
+            {
+                files.Add(file.Name, new ExtendedFileInfo(file, new FileMetainformation(file)));
+                File.Create(user.DirectoryPath + "\\" + file.Name);
+                ApplicationContext.Database.Update();
+            }
+            else
+            {
+                throw new FileException("File already exists in storage!");
+            }
         }        
+
+        public void Remove(FileInfo file)
+        {
+            // file exists in storage
+            if (files.ContainsKey(file.Name))
+            {
+                files.Remove(file.Name);
+                File.Delete(user.DirectoryPath + "\\" + file.Name);
+                ApplicationContext.Database.Update();
+            }
+            else
+            {
+                throw new FileException($"File {file.Name} does not found in the storage");
+            }
+        }
 
 
         public HashSet<ExtendedFileInfo> GetFiles()

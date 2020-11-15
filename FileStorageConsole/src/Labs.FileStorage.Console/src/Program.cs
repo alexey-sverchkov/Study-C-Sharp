@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.IO;
 using Labs.FileStorage.Console.CommandLineParsing.Commands;
+using Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions;
 using Labs.FileStorage.Console.CommandLineParsing.InitialProgramArguments;
 using Labs.FileStorage.Console.src;
 using Labs.FileStorage.Console.src.CommandLineParsing.Commands;
@@ -123,6 +124,10 @@ namespace Labs.FileStorage.Console
                             catch (FormatException ex)
                             {
                                 System.Console.WriteLine("Command not found!");
+                            }
+                            catch (FileException ex)
+                            {
+                                System.Console.WriteLine(ex.Message);
                             }
                             catch (Exception ex)
                             {
