@@ -10,5 +10,6 @@ namespace Labs.FileStorage.Console.src
     {
         public static Users.User         User { get; set; }
         public static Files.FileStorage  FileStorage { get; set; }
+        public static Files.Database     Database { get; set; }
     }
 }

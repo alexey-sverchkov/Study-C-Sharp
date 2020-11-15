@@ -64,6 +64,10 @@ namespace Labs.FileStorage.Console
 
             // get path of database and read all metainformation from database file
             String pathOfDatabase = ConfigurationManager.AppSettings["databaseLocation"];
+
+            // create Database
+            Files.Database database = new Files.Database() { Path = pathOfDatabase };
+            ApplicationContext.Database = database;
          
 
             Files.FileStorage fileStorage = null;

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using Labs.FileStorage.Console.src;
 
 namespace Labs.FileStorage.Console.Files
 {
@@ -79,7 +80,30 @@ namespace Labs.FileStorage.Console.Files
         {
             files.Add(file.Name, new ExtendedFileInfo(file, new FileMetainformation(file)));            
             File.Create(user.DirectoryPath + "\\" +  file.Name);
-            // TODO: add creating file in database.bin
+            ApplicationContext.Database.Update();
         }        
+
+
+        public HashSet<ExtendedFileInfo> GetFiles()
+        {
+            HashSet<ExtendedFileInfo> collection = new HashSet<ExtendedFileInfo>();
+            // add only files
+            foreach(var pair in files)
+            {
+                collection.Add(pair.Value);
+            }
+            return collection;
+        }
+
+        public HashSet<FileMetainformation> GetFilesMetainformation()
+        {
+            HashSet<FileMetainformation> collection = new HashSet<FileMetainformation>();
+            // add only filemetainformation of files
+            foreach(var pair in files)
+            {
+                collection.Add(pair.Value.Metainformation);
+            }
+            return collection;
+        }
     }
 }
