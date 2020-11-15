@@ -34,11 +34,6 @@ namespace Labs.FileStorage.Console.Files
                 ICollection<FileMetainformation> deserializedMetainformation = (ICollection<FileMetainformation>)formatter.Deserialize(fs);
                 return deserializedMetainformation;
             }            
-        }
-
-        public void PrintInfoAbout(FileInfo file, char typeOfPrint)
-        {
-            (new FileMetainformation(file)).Print(typeOfPrint);
-        }
+        }        
     }
 }

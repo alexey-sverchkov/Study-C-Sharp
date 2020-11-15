@@ -7,8 +7,7 @@ using System.IO;
 namespace Labs.FileStorage.Console.CommandLineParsing.Commands
 {
     public class FileUploadCommand : ICommand
-    {
-        private FileManager fm = new FileManager();
+    {        
         public String PathToFile { get; set; }
 
         public void Run()
@@ -17,7 +16,9 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
            
             ApplicationContext.FileStorage.Add(fileToUpload);
             System.Console.WriteLine($"The file {PathToFile} has been uploaded");
-            fm.PrintInfoAbout(fileToUpload, 's');                    
+            //fm.PrintInfoAbout(fileToUpload, 's');                    
+            FileMetainformation fm = ApplicationContext.FileStorage.GetFileMetainformationFrom(fileToUpload);
+            fm.Print('s');
         }
     }
 }

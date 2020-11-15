@@ -61,6 +61,12 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
                         ((FileRemoveCommand)result).FileName = args[2];
                         break;
                     }
+                case ("File Info"):
+                    {
+                        result = new FileInfoCommand();
+                        ((FileInfoCommand)result).FileName = args[2];
+                        break;
+                    }
                 default:
                     {
                         break;

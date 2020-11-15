@@ -75,7 +75,7 @@ namespace Labs.FileStorage.Console.Files
         public bool Contains(FileInfo file)
         {
             return files.ContainsKey(file.Name);
-        }
+        }        
 
         public void Add(FileInfo file)
         {
@@ -135,6 +135,27 @@ namespace Labs.FileStorage.Console.Files
                 collection.Add(pair.Value.Metainformation);
             }
             return collection;
+        }
+
+        // return file metainformation if file exists in storage
+        public FileMetainformation GetFileMetainformationFrom(FileInfo file)
+        {
+            if (Contains(file))
+            {
+                ExtendedFileInfo extendedFileInfo = null;
+                if (files.TryGetValue(file.Name, out extendedFileInfo))
+                {
+                    return extendedFileInfo.Metainformation;
+                }
+                else
+                {
+                    throw new FileException($"Can't get file {file.Name} from storage");
+                }
+            }
+            else
+            {
+                throw new FileException($"File {file.Name} does not found in the storage");
+            }
         }
     }
 }
