@@ -74,6 +74,13 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
                         ((FileMoveCommand)result).DestinationFileName = args[3];
                         break;
                     }
+                case ("File Download"):
+                    {
+                        result = new FileDownloadCommand();
+                        ((FileDownloadCommand)result).FileName = args[2];
+                        ((FileDownloadCommand)result).DestinationPath = args[3];
+                        break;
+                    }
                 default:
                     {
                         break;

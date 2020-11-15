@@ -115,7 +115,7 @@ namespace Labs.FileStorage.Console.Files
         }
 
 
-        public HashSet<ExtendedFileInfo> GetFiles()
+        public HashSet<ExtendedFileInfo> GetExtendedFiles()
         {
             HashSet<ExtendedFileInfo> collection = new HashSet<ExtendedFileInfo>();
             // add only files
@@ -124,6 +124,18 @@ namespace Labs.FileStorage.Console.Files
                 collection.Add(pair.Value);
             }
             return collection;
+        }
+
+        public ExtendedFileInfo GetExtendedFile(String filename)
+        {
+            if (files.ContainsKey(filename))
+            {
+                return files[filename];
+            }
+            else
+            {
+                throw new FileException($"File {filename} does not found in the storage");
+            }
         }
 
         public HashSet<FileMetainformation> GetFilesMetainformation()
