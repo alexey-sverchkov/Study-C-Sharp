@@ -85,7 +85,7 @@ namespace Labs.FileStorage.Console.Files
                 if (!Contains(file))
                 {
                     files.Add(file.Name, new ExtendedFileInfo(file, new FileMetainformation(file)));
-                    File.Create(user.DirectoryPath + "\\" + file.Name);
+                    File.Create(user.DirectoryPath + "\\" + file.Name).Close();
                     ApplicationContext.Database.Update();
                 }
                 else
