@@ -51,7 +51,7 @@ namespace Labs.FileStorage.Console.Files
                 ICollection<FileMetainformation> filesMetainfo = fm.GetMetainformationFromFile(databaseLocation);
                 foreach (FileMetainformation fileMetainfo in filesMetainfo)
                 {
-                    FileInfo file = new FileInfo(fileMetainfo.Name);
+                    FileInfo file = new FileInfo(user.DirectoryPath + "\\" + fileMetainfo.Name);                    
                     this.files.Add(file.Name, new ExtendedFileInfo(file, fileMetainfo));
                 }
             }
@@ -155,6 +155,33 @@ namespace Labs.FileStorage.Console.Files
             else
             {
                 throw new FileException($"File {file.Name} does not found in the storage");
+            }
+        }
+
+        public void ChangeFileName(String sourceFileName, String destinationFileName)
+        {
+            if (Contains(new FileInfo("./" + sourceFileName)))
+            {
+                ExtendedFileInfo extendedFileInfo = new ExtendedFileInfo(files[sourceFileName].FileContent, files[sourceFileName].Metainformation);                
+
+                // rename binary file in storage and user folder
+                extendedFileInfo.FileContent.MoveTo(user.DirectoryPath + "\\" + destinationFileName);
+                // update file name in file metainformation                
+                extendedFileInfo.Metainformation.Name = destinationFileName;
+                // update file extension in file metainformation
+                extendedFileInfo.Metainformation.Extension = extendedFileInfo.FileContent.Extension;                
+
+                // remove old entry from collection
+                files.Remove(sourceFileName);
+
+                // add new entry to collection
+                files.Add(destinationFileName, extendedFileInfo);                
+
+                ApplicationContext.Database.Update();               
+            }
+            else
+            {
+                throw new FileException($"File {sourceFileName} does not found in the storage");
             }
         }
     }

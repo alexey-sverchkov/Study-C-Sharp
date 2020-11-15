@@ -37,7 +37,7 @@ namespace Labs.FileStorage.Console.Files
         }
 
 
-        // Methods
+        /* Methods */
         public override String ToString()
         {
             return $"FileMetainformation [ name: {Name}, " +
@@ -75,6 +75,6 @@ namespace Labs.FileStorage.Console.Files
                         throw new FormatException($"Error: type {type} is unknown to use Print()");                        
                     }
             }
-        }
+        }        
     }
 }

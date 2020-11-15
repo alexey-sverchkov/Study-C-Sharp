@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="users\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="src\appsettings.json" />
     <Content Include="src\appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
