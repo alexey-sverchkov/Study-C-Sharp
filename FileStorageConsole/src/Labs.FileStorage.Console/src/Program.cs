@@ -125,10 +125,10 @@ namespace Labs.FileStorage.Console
                             {
                                 System.Console.WriteLine("Command not found!");
                             }
-                            catch (FileException ex)
+                            catch (Exception ex) when (ex is FileNotFoundException || ex is FileException)
                             {
                                 System.Console.WriteLine(ex.Message);
-                            }
+                            }                            
                             catch (Exception ex)
                             {
                                 System.Console.WriteLine(ex.Message);

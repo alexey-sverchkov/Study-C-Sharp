@@ -79,15 +79,23 @@ namespace Labs.FileStorage.Console.Files
 
         public void Add(FileInfo file)
         {
-            if (!Contains(file))
+            ByteSize sizeOfFile = new ByteSize(file.Length);
+            if (sizeOfFile < MAX_FILE_SIZE)
             {
-                files.Add(file.Name, new ExtendedFileInfo(file, new FileMetainformation(file)));
-                File.Create(user.DirectoryPath + "\\" + file.Name);
-                ApplicationContext.Database.Update();
+                if (!Contains(file))
+                {
+                    files.Add(file.Name, new ExtendedFileInfo(file, new FileMetainformation(file)));
+                    File.Create(user.DirectoryPath + "\\" + file.Name);
+                    ApplicationContext.Database.Update();
+                }
+                else
+                {
+                    throw new FileException("File already exists in storage!");
+                }
             }
             else
             {
-                throw new FileException("File already exists in storage!");
+                throw new FileException("File size is too large to upload");
             }
         }        
 
