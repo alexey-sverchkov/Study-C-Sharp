@@ -1,8 +1,7 @@
-﻿using Labs.FileStorage.Console.src;
-using System;
+﻿using System;
 using System.IO;
 
-namespace Labs.FileStorage.Console.CommandLineParsing.Commands
+namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
 {
     class FileRemoveCommand : ICommand
     {

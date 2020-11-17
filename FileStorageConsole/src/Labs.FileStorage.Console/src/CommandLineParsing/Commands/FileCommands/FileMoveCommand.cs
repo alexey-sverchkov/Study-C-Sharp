@@ -1,7 +1,6 @@
-﻿using Labs.FileStorage.Console.src;
-using System;
+﻿using System;
 
-namespace Labs.FileStorage.Console.CommandLineParsing.Commands
+namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
 {
     public class FileMoveCommand : ICommand
     {

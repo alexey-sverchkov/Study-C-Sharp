@@ -4,8 +4,6 @@ using System.IO;
 using Labs.FileStorage.Console.CommandLineParsing.Commands;
 using Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions;
 using Labs.FileStorage.Console.CommandLineParsing.InitialProgramArguments;
-using Labs.FileStorage.Console.src;
-using Labs.FileStorage.Console.src.CommandLineParsing.Commands;
 using Labs.FileStorage.Console.Users;
 using Microsoft.Extensions.Configuration;
 
@@ -42,7 +40,7 @@ namespace Labs.FileStorage.Console
 
             // validate username and password
 
-            UserAuthenticationManager authenticator = new UserAuthenticationManager();
+            AuthenticationManager authenticator = new AuthenticationManager();
             authenticator.AddUser(new User(configUsername, configPassword, DateTime.Parse(configCreationDate)));           
 
             if (!authenticator.IsUserExists(parsedUsername))
@@ -67,15 +65,14 @@ namespace Labs.FileStorage.Console
             String pathOfDatabase = ConfigurationManager.AppSettings["databaseLocation"];
 
             // create Database
-            Files.Database database = new Files.Database() { Path = pathOfDatabase };
+            Files.Database database = new Files.Database { Path = pathOfDatabase };
             ApplicationContext.Database = database;
-         
 
-            Files.FileStorage fileStorage = null;
+
             try
             {
                 // create file storage
-                fileStorage = new Files.FileStorage(user, configUsersDirectoryPath, pathOfDatabase);
+                Files.FileStorage fileStorage = new Files.FileStorage(user, configUsersDirectoryPath, pathOfDatabase);
                 ApplicationContext.FileStorage = fileStorage;
             }
             catch(Exception ex)
@@ -85,18 +82,21 @@ namespace Labs.FileStorage.Console
             }                    
 
             // program loop
-            String currentCommand = null;
-            while(!(currentCommand = System.Console.ReadLine()).Equals("exit"))
+            String currentCommand;
+            while(!(currentCommand = System.Console.ReadLine().ToLower()).Trim().Equals("exit"))
             {
                 String[] parameters = currentCommand.Split(" ");
+                // Review: remove duplication.
+                // switch-case should be inside CommandBuilder
                 switch (parameters[0])
                 {
-                    case ("User"):
+                    case ("user"):
                         {                           
                             try
-                            {                                
-                                var commandLinePattern = CommandBuilder.BuildWithType(CommandType.User.ToString());                                                               
-                                var command = commandLinePattern.BuildFrom(parameters);                                                               
+                            {           
+                                // Review: variable name also should be changed. e.g. commandBuilder
+                                var commandBuilder = CommandBuilder.BuildWithType(CommandType.User);                                                               
+                                var command = commandBuilder.Build(parameters);                                                               
 
                                 command.Run();
                             }
@@ -112,12 +112,12 @@ namespace Labs.FileStorage.Console
 
                             break;
                         }
-                    case ("File"):
+                    case ("file"):
                         {
                             try
                             {
-                                var commandLinePattern = CommandBuilder.BuildWithType(CommandType.File.ToString());
-                                var command = commandLinePattern.BuildFrom(parameters);
+                                var commandBuilder = CommandBuilder.BuildWithType(CommandType.File);
+                                var command = commandBuilder.Build(parameters);
 
                                 command.Run();
                             }

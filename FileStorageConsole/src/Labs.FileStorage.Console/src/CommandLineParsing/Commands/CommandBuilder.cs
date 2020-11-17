@@ -1,30 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using Labs.FileStorage.Console.src.CommandLineParsing;
-using Labs.FileStorage.Console.src.CommandLineParsing.Commands;
+using Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands;
+using Labs.FileStorage.Console.CommandLineParsing.Commands.UserCommands;
 
 namespace Labs.FileStorage.Console.CommandLineParsing.Commands
 {    
     public class CommandBuilder
     {
         /* Properties */
-        public String TypeOfCommand { get; set; }
+        public CommandType TypeOfCommand { get; set; }
+        public string TypeOfCommandName => TypeOfCommand.ToString().ToLower();
         public String Name { get; set; }          
 
 
         /* Methods */        
 
-        public static CommandBuilder BuildWithType(String typeOfCommand)
+        public static CommandBuilder BuildWithType(CommandType typeOfCommand)
         {
             return new CommandBuilder
             {
                 TypeOfCommand = typeOfCommand,
-                Name = "",                
+                Name = string.Empty,                
             };
         }        
        
 
-        public virtual bool TryBuildFrom(String[] args, out ICommand result)
+        public virtual bool TryBuild(String[] args, out ICommand result)
         {
             result = null;
             // pattern can't match an empty string
@@ -34,7 +34,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             }
 
             // pattern can't match some other command
-            if (!args[0].Equals(TypeOfCommand))
+            if (!args[0].ToLower().Equals(TypeOfCommandName))
             {
                 return false;
             }
@@ -42,40 +42,46 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             Name = args[1];                          
             
             // for command with certain type and name try to find corresponding class                                  
-            switch(TypeOfCommand + " " + Name)
+            switch($"{TypeOfCommandName} {Name}")
             {
-                case ("User Info"):
+                case ("user info"):
                     {
                         result = new UserInfoCommand();
                         break;
                     }
-                case ("File Upload"):
+                case ("file upload"):
                     {
-                        result = new FileUploadCommand();
-                        ((FileUploadCommand)result).PathToFile = args[2];
+                        result = new FileUploadCommand
+                        {
+                            PathToFile = args[2]
+                        };
                         break;
                     }
-                case ("File Remove"):
+                case ("file remove"):
                     {
+                        // Review: Do the same as in previous `file upload` case
                         result = new FileRemoveCommand();
                         ((FileRemoveCommand)result).FileName = args[2];
                         break;
                     }
-                case ("File Info"):
+                case ("file info"):
                     {
+                        // Review: Do the same as in previous `file upload` case
                         result = new FileInfoCommand();
                         ((FileInfoCommand)result).FileName = args[2];
                         break;
                     }
-                case ("File Move"):
+                case ("file move"):
                     {
+                        // Review: Do the same as in previous `file upload` case
                         result = new FileMoveCommand();
                         ((FileMoveCommand)result).SourceFileName = args[2];
                         ((FileMoveCommand)result).DestinationFileName = args[3];
                         break;
                     }
-                case ("File Download"):
+                case ("file download"):
                     {
+                        // Review: Do the same as in previous `file upload` case
                         result = new FileDownloadCommand();
                         ((FileDownloadCommand)result).FileName = args[2];
                         ((FileDownloadCommand)result).DestinationPath = args[3];
@@ -88,14 +94,17 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             }                        
             
             // class not found
-            if (result == null) return false;                        
+            if (result == null)
+            {
+                return false;
+            }                        
 
             return true;
         }
 
-        public virtual ICommand BuildFrom(String[] args)
+        public virtual ICommand Build(String[] args)
         {
-            if (TryBuildFrom(args, out var result))
+            if (TryBuild(args, out var result))
             {
                 return result;
             }
