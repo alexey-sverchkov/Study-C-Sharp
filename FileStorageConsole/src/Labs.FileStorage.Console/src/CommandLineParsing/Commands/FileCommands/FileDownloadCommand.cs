@@ -17,6 +17,10 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
             if (!File.Exists($@"{DestinationPath}\{FileName}"))
             {                
                 File.Copy(extendedFileInfo.FileContent.FullName, $@"{DestinationPath}\{extendedFileInfo.FileContent.Name}");
+                // increase number of downloads of file
+                extendedFileInfo.Metainformation.DownloadsNumber++;
+                // update database
+                ApplicationContext.Database.Update();
                 System.Console.WriteLine($"The file {FileName} has been downloaded");
             }
             else

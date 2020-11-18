@@ -86,8 +86,7 @@ namespace Labs.FileStorage.Console.Files
                 if (!Contains(file))
                 {
                     files.Add(file.Name, new ExtendedFileInfo(file, new FileMetainformation(file)));
-                    File.Create(user.DirectoryPath + "\\" + file.Name).Close();
-                    ApplicationContext.Database.Update();
+                    File.Create(user.DirectoryPath + "\\" + file.Name).Close();                    
                 }
                 else
                 {
@@ -106,8 +105,7 @@ namespace Labs.FileStorage.Console.Files
             if (files.ContainsKey(file.Name))
             {
                 files.Remove(file.Name);
-                File.Delete(user.DirectoryPath + "\\" + file.Name);
-                ApplicationContext.Database.Update();
+                File.Delete(user.DirectoryPath + "\\" + file.Name);                
             }
             else
             {
@@ -188,9 +186,7 @@ namespace Labs.FileStorage.Console.Files
                 files.Remove(sourceFileName);
 
                 // add new entry to collection
-                files.Add(destinationFileName, extendedFileInfo);                
-
-                ApplicationContext.Database.Update();               
+                files.Add(destinationFileName, extendedFileInfo);                                              
             }
             else
             {

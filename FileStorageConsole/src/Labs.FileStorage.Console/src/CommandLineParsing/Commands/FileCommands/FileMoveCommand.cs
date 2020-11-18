@@ -10,6 +10,8 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
         public void Run()
         {
             ApplicationContext.FileStorage.ChangeFileName(SourceFileName, DestinationFileName);
+            // update database
+            ApplicationContext.Database.Update();
             System.Console.WriteLine($"The file {SourceFileName} has been moved to {DestinationFileName}");
         }
     }
