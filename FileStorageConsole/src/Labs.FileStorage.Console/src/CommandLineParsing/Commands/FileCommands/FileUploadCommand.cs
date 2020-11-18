@@ -13,8 +13,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
             FileInfo fileToUpload = new FileInfo(PathToFile);
            
             ApplicationContext.FileStorage.Add(fileToUpload);
-            System.Console.WriteLine($"The file {PathToFile} has been uploaded");
-            //fm.PrintInfoAbout(fileToUpload, 's');                    
+            System.Console.WriteLine($"The file {PathToFile} has been uploaded");                             
             FileMetainformation fm = ApplicationContext.FileStorage.GetFileMetainformationFrom(fileToUpload);
             fm.Print('s');
         }

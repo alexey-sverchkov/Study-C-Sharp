@@ -16,7 +16,9 @@ namespace Labs.FileStorage.Console.Files
 
         /* Properties and Fields */
         private readonly Dictionary<String, ExtendedFileInfo> files = new Dictionary<String, ExtendedFileInfo>();
-        private readonly User user;                           
+        private readonly User user;    
+        
+
         /* Constructors */
 
         static FileStorage()

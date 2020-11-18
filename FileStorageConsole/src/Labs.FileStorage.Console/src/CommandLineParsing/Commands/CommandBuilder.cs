@@ -32,14 +32,14 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             {
                 return false;
             }
-
+          
             // pattern can't match some other command
             if (!args[0].ToLower().Equals(TypeOfCommandName))
             {
                 return false;
             }
 
-            Name = args[1];                          
+            Name = args[1].ToLower();                          
             
             // for command with certain type and name try to find corresponding class                                  
             switch($"{TypeOfCommandName} {Name}")
@@ -58,33 +58,37 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
                         break;
                     }
                 case ("file remove"):
-                    {
-                        // Review: Do the same as in previous `file upload` case
-                        result = new FileRemoveCommand();
-                        ((FileRemoveCommand)result).FileName = args[2];
+                    {                        
+                        result = new FileRemoveCommand
+                        {
+                            FileName = args[2]
+                        };                        
                         break;
                     }
                 case ("file info"):
-                    {
-                        // Review: Do the same as in previous `file upload` case
-                        result = new FileInfoCommand();
-                        ((FileInfoCommand)result).FileName = args[2];
+                    {                        
+                        result = new FileInfoCommand
+                        {
+                            FileName = args[2]
+                        };                        
                         break;
                     }
                 case ("file move"):
-                    {
-                        // Review: Do the same as in previous `file upload` case
-                        result = new FileMoveCommand();
-                        ((FileMoveCommand)result).SourceFileName = args[2];
-                        ((FileMoveCommand)result).DestinationFileName = args[3];
+                    {                        
+                        result = new FileMoveCommand
+                        {
+                            SourceFileName = args[2],
+                            DestinationFileName = args[3]
+                        };                        
                         break;
                     }
                 case ("file download"):
-                    {
-                        // Review: Do the same as in previous `file upload` case
-                        result = new FileDownloadCommand();
-                        ((FileDownloadCommand)result).FileName = args[2];
-                        ((FileDownloadCommand)result).DestinationPath = args[3];
+                    {                        
+                        result = new FileDownloadCommand
+                        {
+                            FileName = args[2],
+                            DestinationPath = args[3]
+                        };                       
                         break;
                     }
                 default:

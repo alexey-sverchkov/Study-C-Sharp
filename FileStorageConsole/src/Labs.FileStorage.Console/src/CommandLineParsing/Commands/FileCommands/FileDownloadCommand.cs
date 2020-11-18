@@ -12,14 +12,11 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
 
         public void Run()
         {
-            ExtendedFileInfo extendedFileInfo = ApplicationContext.FileStorage.GetExtendedFile(FileName);
-            // Review: use string interpolation. Do not use concatenation where it is not needed.
-            // Read: find and read an artival about how string concatenation is working on C#
-            // what is better to write + or use something else and when
-            // file does not exists in destination directory
-            if (!File.Exists(DestinationPath + $@"\{FileName}"))
+            ExtendedFileInfo extendedFileInfo = ApplicationContext.FileStorage.GetExtendedFile(FileName);            
+            // file does not exists in destination directory            
+            if (!File.Exists($@"{DestinationPath}\{FileName}"))
             {                
-                File.Copy(extendedFileInfo.FileContent.FullName, DestinationPath + $@"\{extendedFileInfo.FileContent.Name}");
+                File.Copy(extendedFileInfo.FileContent.FullName, $@"{DestinationPath}\{extendedFileInfo.FileContent.Name}");
                 System.Console.WriteLine($"The file {FileName} has been downloaded");
             }
             else

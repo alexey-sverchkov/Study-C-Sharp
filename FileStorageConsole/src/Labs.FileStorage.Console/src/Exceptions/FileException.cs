@@ -1,8 +1,7 @@
 ﻿using System;
 
 namespace Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions
-{
-    // Review: exceptions folder should be moved up to src root
+{    
     [Serializable]
     public class FileException : Exception
     {

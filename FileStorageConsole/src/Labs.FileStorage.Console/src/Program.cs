@@ -83,7 +83,7 @@ namespace Labs.FileStorage.Console
 
             // program loop
             String currentCommand;
-            while(!(currentCommand = System.Console.ReadLine().ToLower()).Trim().Equals("exit"))
+            while(!(currentCommand = System.Console.ReadLine()).Trim().Equals("exit"))
             {
                 String[] parameters = currentCommand.Split(" ");
                 // Review: remove duplication.
@@ -93,8 +93,7 @@ namespace Labs.FileStorage.Console
                     case ("user"):
                         {                           
                             try
-                            {           
-                                // Review: variable name also should be changed. e.g. commandBuilder
+                            {                                           
                                 var commandBuilder = CommandBuilder.BuildWithType(CommandType.User);                                                               
                                 var command = commandBuilder.Build(parameters);                                                               
 
