@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Labs.FileStorage.Console.src.CommandLineParsing.Commands
+﻿namespace Labs.FileStorage.Console.CommandLineParsing.Commands
 {
     public enum CommandType
-    {
-        User,
-        File
+    {       
+        NoSpecified = 0, // to make sure that we not miss this field to assign
+        User = 1,
+        File = 2
     }
 }

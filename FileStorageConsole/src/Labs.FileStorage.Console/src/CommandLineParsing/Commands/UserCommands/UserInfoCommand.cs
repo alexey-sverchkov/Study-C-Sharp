@@ -1,7 +1,4 @@
-﻿using Labs.FileStorage.Console.src;
-using System;
-
-namespace Labs.FileStorage.Console.CommandLineParsing.Commands
+﻿namespace Labs.FileStorage.Console.CommandLineParsing.Commands.UserCommands
 {
     class UserInfoCommand : ICommand
     {        

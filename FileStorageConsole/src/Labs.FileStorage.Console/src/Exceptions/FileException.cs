@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions
-{
+{    
     [Serializable]
     public class FileException : Exception
     {

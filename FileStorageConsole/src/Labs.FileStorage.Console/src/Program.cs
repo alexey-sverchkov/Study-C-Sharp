@@ -4,8 +4,6 @@ using System.IO;
 using Labs.FileStorage.Console.CommandLineParsing.Commands;
 using Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions;
 using Labs.FileStorage.Console.CommandLineParsing.InitialProgramArguments;
-using Labs.FileStorage.Console.src;
-using Labs.FileStorage.Console.src.CommandLineParsing.Commands;
 using Labs.FileStorage.Console.Users;
 using Microsoft.Extensions.Configuration;
 
@@ -42,7 +40,7 @@ namespace Labs.FileStorage.Console
 
             // validate username and password
 
-            UserAuthenticationManager authenticator = new UserAuthenticationManager();
+            AuthenticationManager authenticator = new AuthenticationManager();
             authenticator.AddUser(new User(configUsername, configPassword, DateTime.Parse(configCreationDate)));           
 
             if (!authenticator.IsUserExists(parsedUsername))
@@ -67,15 +65,14 @@ namespace Labs.FileStorage.Console
             String pathOfDatabase = ConfigurationManager.AppSettings["databaseLocation"];
 
             // create Database
-            Files.Database database = new Files.Database() { Path = pathOfDatabase };
+            Files.Database database = new Files.Database { Path = pathOfDatabase };
             ApplicationContext.Database = database;
-         
 
-            Files.FileStorage fileStorage = null;
+
             try
             {
                 // create file storage
-                fileStorage = new Files.FileStorage(user, configUsersDirectoryPath, pathOfDatabase);
+                Files.FileStorage fileStorage = new Files.FileStorage(user, configUsersDirectoryPath, pathOfDatabase);
                 ApplicationContext.FileStorage = fileStorage;
             }
             catch(Exception ex)
@@ -85,63 +82,30 @@ namespace Labs.FileStorage.Console
             }                    
 
             // program loop
-            String currentCommand = null;
-            while(!(currentCommand = System.Console.ReadLine()).Equals("exit"))
+            String currentCommand;
+            while(!(currentCommand = System.Console.ReadLine()).Trim().Equals("exit"))
             {
-                String[] parameters = currentCommand.Split(" ");
-                switch (parameters[0])
+                String[] parameters = currentCommand.Split(" ");                
+                String typeOfCommand = parameters[0];
+                try
                 {
-                    case ("User"):
-                        {                           
-                            try
-                            {                                
-                                var commandLinePattern = CommandBuilder.BuildWithType(CommandType.User.ToString());                                                               
-                                var command = commandLinePattern.BuildFrom(parameters);                                                               
+                    var commandBuilder = CommandBuilder.BuildWithType(typeOfCommand);
+                    var command = commandBuilder.Build(parameters);
 
-                                command.Run();
-                            }
-                            catch(FormatException ex)
-                            {
-                                System.Console.WriteLine("Command not found!");
-                            }
-                            catch(Exception ex)
-                            {
-                                System.Console.WriteLine(ex.Message);
-                                System.Console.WriteLine(ex.StackTrace);
-                            }
-
-                            break;
-                        }
-                    case ("File"):
-                        {
-                            try
-                            {
-                                var commandLinePattern = CommandBuilder.BuildWithType(CommandType.File.ToString());
-                                var command = commandLinePattern.BuildFrom(parameters);
-
-                                command.Run();
-                            }
-                            catch (FormatException ex)
-                            {
-                                System.Console.WriteLine("Command not found!");
-                            }
-                            catch (Exception ex) when (ex is FileNotFoundException || ex is FileException)
-                            {
-                                System.Console.WriteLine(ex.Message);
-                            }                            
-                            catch (Exception ex)
-                            {
-                                System.Console.WriteLine(ex.Message);
-                                System.Console.WriteLine(ex.StackTrace);
-                            }
-
-                            break;
-                        }
-                    default:
-                        {
-                            System.Console.WriteLine("Command is not found!");
-                            break;
-                        }
+                    command.Run();
+                }
+                catch (FormatException ex)
+                {
+                    System.Console.WriteLine("Command not found!");
+                }
+                catch (Exception ex) when (ex is FileNotFoundException || ex is FileException)
+                {
+                    System.Console.WriteLine(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.Message);
+                    System.Console.WriteLine(ex.StackTrace);
                 }
             }
         }                

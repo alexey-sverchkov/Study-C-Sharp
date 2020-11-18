@@ -1,10 +1,8 @@
-﻿using Labs.FileStorage.Console.Files;
-using Labs.FileStorage.Console.src;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
+using Labs.FileStorage.Console.Files;
 
-namespace Labs.FileStorage.Console.CommandLineParsing.Commands
+namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
 {
     class FileInfoCommand : ICommand
     {

@@ -1,10 +1,8 @@
-﻿using Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions;
-using Labs.FileStorage.Console.Files;
-using Labs.FileStorage.Console.src;
-using System;
+﻿using System;
 using System.IO;
+using Labs.FileStorage.Console.Files;
 
-namespace Labs.FileStorage.Console.CommandLineParsing.Commands
+namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
 {
     public class FileUploadCommand : ICommand
     {        
@@ -15,8 +13,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             FileInfo fileToUpload = new FileInfo(PathToFile);
            
             ApplicationContext.FileStorage.Add(fileToUpload);
-            System.Console.WriteLine($"The file {PathToFile} has been uploaded");
-            //fm.PrintInfoAbout(fileToUpload, 's');                    
+            System.Console.WriteLine($"The file {PathToFile} has been uploaded");                             
             FileMetainformation fm = ApplicationContext.FileStorage.GetFileMetainformationFrom(fileToUpload);
             fm.Print('s');
         }
