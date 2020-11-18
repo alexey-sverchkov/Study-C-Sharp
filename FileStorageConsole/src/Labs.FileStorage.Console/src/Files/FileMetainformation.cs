@@ -10,23 +10,16 @@ namespace Labs.FileStorage.Console.Files
         public  String   Name { get; set; } // file name
         public  String   Extension { get; set; }
                 
-        public  ulong    SizeInBytes { get; set; }
-        public  double   SizeInKilobytes => (double)SizeInBytes / 1024;
-
-        public  double   SizeInMegabytes => SizeInKilobytes / 1024;        
+        public  ulong    SizeInBytes { get; set; }              
 
         public  DateTime CreationDate { get; set; }
        
-        public uint DownloadsNumber { get; set; }
+        public uint DownloadsNumber { get; set; }     
+        
+        // hash of file
+        public String Hash { get; set; }
 
-        // constructors
-        public FileMetainformation(String name, String extension, ulong sizeInBytes, DateTime creationDate)
-        {
-            Name = name;
-            Extension = extension;
-            SizeInBytes = sizeInBytes;
-            CreationDate = creationDate;
-        }
+        /* Constructors  */
 
         public FileMetainformation(FileInfo file)
         {
@@ -34,6 +27,8 @@ namespace Labs.FileStorage.Console.Files
             Extension = file.Extension;
             SizeInBytes = (ulong)file.Length;
             CreationDate = file.CreationTime;
+            FileIntegrityChecker fic = new FileIntegrityChecker();
+            Hash = fic.CalculateMD5(file.FullName);
         }
 
 
@@ -67,7 +62,7 @@ namespace Labs.FileStorage.Console.Files
                         System.Console.WriteLine($"- file extension: {Extension}");
                         System.Console.WriteLine($"- file size: {SizeInBytes} bytes");
                         System.Console.WriteLine($"- creation date: {CreationDate.ToString("F")}");
-                        System.Console.WriteLine($"- number of downloads: {DownloadsNumber}");
+                        System.Console.WriteLine($"- number of downloads: {DownloadsNumber}");                                                
                         break;
                     }
                 default:
