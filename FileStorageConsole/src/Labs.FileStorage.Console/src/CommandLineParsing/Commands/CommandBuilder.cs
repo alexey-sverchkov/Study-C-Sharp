@@ -14,11 +14,30 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
 
         /* Methods */        
 
-        public static CommandBuilder BuildWithType(CommandType typeOfCommand)
+        public static CommandBuilder BuildWithType(String typeOfCommand)
         {
+            CommandType resultType = new CommandType();
+            switch (typeOfCommand.ToLower())
+            {
+                case ("user"):
+                    {
+                        resultType = CommandType.User;
+                        break;
+                    }
+                case ("file"):
+                    {
+                        resultType = CommandType.File;
+                        break;
+                    }
+                default:
+                    {
+                        resultType = CommandType.NoSpecified;
+                        break;
+                    }
+            }
             return new CommandBuilder
             {
-                TypeOfCommand = typeOfCommand,
+                TypeOfCommand = resultType,
                 Name = string.Empty,                
             };
         }        

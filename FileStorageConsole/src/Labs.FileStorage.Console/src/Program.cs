@@ -85,62 +85,27 @@ namespace Labs.FileStorage.Console
             String currentCommand;
             while(!(currentCommand = System.Console.ReadLine()).Trim().Equals("exit"))
             {
-                String[] parameters = currentCommand.Split(" ");
-                // Review: remove duplication.
-                // switch-case should be inside CommandBuilder
-                switch (parameters[0])
+                String[] parameters = currentCommand.Split(" ");                
+                String typeOfCommand = parameters[0];
+                try
                 {
-                    case ("user"):
-                        {                           
-                            try
-                            {                                           
-                                var commandBuilder = CommandBuilder.BuildWithType(CommandType.User);                                                               
-                                var command = commandBuilder.Build(parameters);                                                               
+                    var commandBuilder = CommandBuilder.BuildWithType(typeOfCommand);
+                    var command = commandBuilder.Build(parameters);
 
-                                command.Run();
-                            }
-                            catch(FormatException ex)
-                            {
-                                System.Console.WriteLine("Command not found!");
-                            }
-                            catch(Exception ex)
-                            {
-                                System.Console.WriteLine(ex.Message);
-                                System.Console.WriteLine(ex.StackTrace);
-                            }
-
-                            break;
-                        }
-                    case ("file"):
-                        {
-                            try
-                            {
-                                var commandBuilder = CommandBuilder.BuildWithType(CommandType.File);
-                                var command = commandBuilder.Build(parameters);
-
-                                command.Run();
-                            }
-                            catch (FormatException ex)
-                            {
-                                System.Console.WriteLine("Command not found!");
-                            }
-                            catch (Exception ex) when (ex is FileNotFoundException || ex is FileException)
-                            {
-                                System.Console.WriteLine(ex.Message);
-                            }                            
-                            catch (Exception ex)
-                            {
-                                System.Console.WriteLine(ex.Message);
-                                System.Console.WriteLine(ex.StackTrace);
-                            }
-
-                            break;
-                        }
-                    default:
-                        {
-                            System.Console.WriteLine("Command is not found!");
-                            break;
-                        }
+                    command.Run();
+                }
+                catch (FormatException ex)
+                {
+                    System.Console.WriteLine("Command not found!");
+                }
+                catch (Exception ex) when (ex is FileNotFoundException || ex is FileException)
+                {
+                    System.Console.WriteLine(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.Message);
+                    System.Console.WriteLine(ex.StackTrace);
                 }
             }
         }                
