@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace Labs.FileStorage.Console.Users
 {
-    public class UserAuthenticationManager
+    public class AuthenticationManager
     {
         //  key - username, value - user
         private readonly Dictionary<String, User> users = new Dictionary<string, User>();
 
         /* Constructors */
-        public UserAuthenticationManager()
+        public AuthenticationManager()
         {
             // ctor
         }
 
-        public UserAuthenticationManager(Dictionary<String, User> users)
+        public AuthenticationManager(Dictionary<String, User> users)
         {
             this.users = users;
         }

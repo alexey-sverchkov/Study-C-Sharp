@@ -1,38 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using Labs.FileStorage.Console.src.CommandLineParsing;
-using Labs.FileStorage.Console.src.CommandLineParsing.Commands;
+using Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands;
+using Labs.FileStorage.Console.CommandLineParsing.Commands.UserCommands;
 
 namespace Labs.FileStorage.Console.CommandLineParsing.Commands
 {    
     public class CommandBuilder
     {
         /* Properties */
-        public String TypeOfCommand { get; set; }
-        public String Name { get; set; }
-        public List<String> Parameters { get; set; }        
+        public CommandType TypeOfCommand { get; set; }
+        public string TypeOfCommandName => TypeOfCommand.ToString().ToLower();
+        public String Name { get; set; }          
 
 
         /* Methods */        
 
         public static CommandBuilder BuildWithType(String typeOfCommand)
         {
+            CommandType resultType = new CommandType();
+            switch (typeOfCommand.ToLower())
+            {
+                case ("user"):
+                    {
+                        resultType = CommandType.User;
+                        break;
+                    }
+                case ("file"):
+                    {
+                        resultType = CommandType.File;
+                        break;
+                    }
+                default:
+                    {
+                        resultType = CommandType.NoSpecified;
+                        break;
+                    }
+            }
             return new CommandBuilder
             {
-                TypeOfCommand = typeOfCommand,
-                Name = "",
-                Parameters = new List<String>(),
+                TypeOfCommand = resultType,
+                Name = string.Empty,                
             };
         }        
+       
 
-
-        public CommandBuilder HasParameter(String name)
-        {
-            Parameters.Add(name);
-            return this;
-        }
-
-        public virtual bool TryBuildFrom(String[] args, out ICommand result)
+        public virtual bool TryBuild(String[] args, out ICommand result)
         {
             result = null;
             // pattern can't match an empty string
@@ -40,39 +51,83 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             {
                 return false;
             }
-
+          
             // pattern can't match some other command
-            if (!args[0].Equals(TypeOfCommand))
+            if (!args[0].ToLower().Equals(TypeOfCommandName))
             {
                 return false;
             }
 
-            Name = args[1];              
-
-            for(int i = 2; i < args.Length; ++i)
+            Name = args[1].ToLower();                          
+            
+            // for command with certain type and name try to find corresponding class                                  
+            switch($"{TypeOfCommandName} {Name}")
             {
-                Parameters.Add(args[i]);
-            }
-            
-            // for command with certain type and name try to find corresponding class                      
-            var className = "Labs.FileStorage.Console.CommandLineParsing.Commands." + TypeOfCommand + Name + "Command";
-            var type = System.Type.GetType(className);
-            
+                case ("user info"):
+                    {
+                        result = new UserInfoCommand();
+                        break;
+                    }
+                case ("file upload"):
+                    {
+                        result = new FileUploadCommand
+                        {
+                            PathToFile = args[2]
+                        };
+                        break;
+                    }
+                case ("file remove"):
+                    {                        
+                        result = new FileRemoveCommand
+                        {
+                            FileName = args[2]
+                        };                        
+                        break;
+                    }
+                case ("file info"):
+                    {                        
+                        result = new FileInfoCommand
+                        {
+                            FileName = args[2]
+                        };                        
+                        break;
+                    }
+                case ("file move"):
+                    {                        
+                        result = new FileMoveCommand
+                        {
+                            SourceFileName = args[2],
+                            DestinationFileName = args[3]
+                        };                        
+                        break;
+                    }
+                case ("file download"):
+                    {                        
+                        result = new FileDownloadCommand
+                        {
+                            FileName = args[2],
+                            DestinationPath = args[3]
+                        };                       
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }                        
             
             // class not found
-            if (type == null) return false;
-
-            // create an instance
-            result = (ICommand)System.Activator.CreateInstance(type);
-
-            // TODO in future add parsing parameters
+            if (result == null)
+            {
+                return false;
+            }                        
 
             return true;
         }
 
-        public virtual ICommand BuildFrom(String[] args)
+        public virtual ICommand Build(String[] args)
         {
-            if (TryBuildFrom(args, out var result))
+            if (TryBuild(args, out var result))
             {
                 return result;
             }
