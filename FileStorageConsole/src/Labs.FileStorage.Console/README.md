@@ -90,7 +90,7 @@ into `destination-file-name`
     The file "k-pax.mkv" has been moved to "k-pax-the-best.mkv"
     ```
 
-- `file remove <file-name>` - delete file `file-name` from the storage *beyond recovery
+- `file remove <file-name>` - delete file `file-name` from the storage *beyond recovery*
 
     ```bash
     > file remove "k-pax.mkv"
@@ -103,5 +103,13 @@ into `destination-file-name`
     ```bash
     > file info "k-pax.mkv"
 
-    The file "k-pax.mkv" has been removed
+    - file name: "k-pax.mkv"
+    - file extension: "mkv"
+    - file size: 4.3 Gb
+    - creation date: 2017-09-09
+    - number of downloads: 12
     ```
+
+### Other
+
+- `exit` - to exit from app.
