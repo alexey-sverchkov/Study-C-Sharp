@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace Labs.FileStorage.Console.Files
 {
@@ -17,6 +18,7 @@ namespace Labs.FileStorage.Console.Files
         public uint DownloadsNumber { get; set; }     
         
         // hash of file
+        [JsonIgnore]
         public String Hash { get; set; }
 
         /* Constructors  */
