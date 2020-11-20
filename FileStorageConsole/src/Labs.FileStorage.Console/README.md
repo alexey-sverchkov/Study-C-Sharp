@@ -110,6 +110,28 @@ into `destination-file-name`
     - number of downloads: 12
     ```
 
+### Export
+
+- `file export <destination-path> --format <format>` - save all metainformation about files along the given `destination-path` in format `format`
+
+    ```bash
+    > file export "~/work/meta-info.json" --format json
+
+    The meta-information has been exported, path = "~/work/meta-info.json"
+    ```
+
+    *Remark:* if option `format` is not specified, than it will save in default `json` format.
+
+- `file export --info` - display all available export formats
+
+    ```bash
+    > file export --info
+
+    Available export formats:
+    - json
+    - xml    
+    ```
+
 ### Other
 
 - `exit` - to exit from app.
