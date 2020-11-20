@@ -22,8 +22,7 @@ namespace Labs.FileStorage.Console.Files.Export
                 {
                     WriteIndented = true
                 };
-                String result = JsonSerializer.Serialize(FilesMetainformation, typeof(HashSet<FileMetainformation>), options);
-                System.Console.WriteLine(result);
+                String result = JsonSerializer.Serialize(FilesMetainformation, typeof(HashSet<FileMetainformation>), options);                
                 file.Write(result);
             }
         }
