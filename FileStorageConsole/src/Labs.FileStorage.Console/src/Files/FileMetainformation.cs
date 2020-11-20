@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text.Json.Serialization;
 
 namespace Labs.FileStorage.Console.Files
 {
@@ -18,10 +17,13 @@ namespace Labs.FileStorage.Console.Files
         public uint DownloadsNumber { get; set; }     
         
         // hash of file
-        [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
+        [System.Xml.Serialization.XmlIgnore]
         public String Hash { get; set; }
 
         /* Constructors  */
+        public FileMetainformation() 
+        { }
 
         public FileMetainformation(FileInfo file)
         {
