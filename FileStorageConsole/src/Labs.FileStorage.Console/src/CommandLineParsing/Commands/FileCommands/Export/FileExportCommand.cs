@@ -19,7 +19,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands.Expo
             {
                 exporter = new JsonMetainformationExporter(ApplicationContext.Database.GetFilesMetainformation());                
             }
-            else if (Format.Equals(ExportFormat.XML))
+            else if (Format.Equals(ExportFormat.Xml))
             {
                 exporter = new XmlMetainformationExporter(ApplicationContext.Database.GetFilesMetainformation());
             }

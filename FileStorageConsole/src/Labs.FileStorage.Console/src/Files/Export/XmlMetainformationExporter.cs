@@ -11,7 +11,7 @@ namespace Labs.FileStorage.Console.Files.Export
         public XmlMetainformationExporter(ICollection<FileMetainformation> filesMetainformation)
             : base(filesMetainformation)
         {
-            Format = ExportFormat.XML;
+            Format = ExportFormat.Xml;
         }
 
         public override void Export(String filename)

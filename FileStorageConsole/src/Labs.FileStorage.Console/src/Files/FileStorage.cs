@@ -1,5 +1,5 @@
 ﻿using System;
- using ByteSizeLib;
+using ByteSizeLib;
 using Labs.FileStorage.Console.Users;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,8 +11,8 @@ namespace Labs.FileStorage.Console.Files
 {
     public class FileStorage
     {
-        public static readonly ByteSize MAX_FILE_SIZE;     // max file size in bytes
-        public static readonly ByteSize STORAGE_CAPACITY;  // total capacity of user storage
+        private static readonly ByteSize MAX_FILE_SIZE;     // max file size in bytes
+        private static readonly ByteSize STORAGE_CAPACITY;  // total capacity of user storage
 
         /* Properties and Fields */
         private readonly Dictionary<String, ExtendedFileInfo> files = new Dictionary<String, ExtendedFileInfo>();
@@ -52,6 +52,7 @@ namespace Labs.FileStorage.Console.Files
                 ICollection<FileMetainformation> filesMetainfo = fm.GetMetainformationFromFile(databaseLocation);
                 foreach (FileMetainformation fileMetainfo in filesMetainfo)
                 {
+                    // REVIEW: Use string interpolation
                     FileInfo file = new FileInfo(user.DirectoryPath + "\\" + fileMetainfo.Name);                    
                     this.files.Add(file.Name, new ExtendedFileInfo(file, fileMetainfo));
                 }
@@ -153,20 +154,15 @@ namespace Labs.FileStorage.Console.Files
         {
             if (Contains(file))
             {
-                ExtendedFileInfo extendedFileInfo = null;
-                if (files.TryGetValue(file.Name, out extendedFileInfo))
+                if (files.TryGetValue(file.Name, out ExtendedFileInfo extendedFileInfo))
                 {
                     return extendedFileInfo.Metainformation;
                 }
-                else
-                {
-                    throw new FileException($"Can't get file {file.Name} from storage");
-                }
+
+                throw new FileException($"Can't get file {file.Name} from storage");
             }
-            else
-            {
-                throw new FileException($"File {file.Name} does not found in the storage");
-            }
+
+            throw new FileException($"File {file.Name} does not found in the storage");
         }
 
         public void ChangeFileName(String sourceFileName, String destinationFileName)

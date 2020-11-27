@@ -18,7 +18,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
 
         public static CommandBuilder BuildWithType(String typeOfCommand)
         {
-            CommandType resultType = new CommandType();
+            CommandType resultType;
             switch (typeOfCommand.ToLower())
             {
                 case ("user"):
@@ -134,10 +134,6 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
                         {
                             result = new FileExportInfoCommand();
                         }
-                        break;
-                    }
-                default:
-                    {
                         break;
                     }
             }                        
