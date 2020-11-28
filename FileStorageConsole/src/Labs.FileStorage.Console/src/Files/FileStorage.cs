@@ -51,9 +51,8 @@ namespace Labs.FileStorage.Console.Files
                 FileManager fm = new FileManager();
                 ICollection<FileMetainformation> filesMetainfo = fm.GetMetainformationFromFile(databaseLocation);
                 foreach (FileMetainformation fileMetainfo in filesMetainfo)
-                {
-                    // REVIEW: Use string interpolation
-                    FileInfo file = new FileInfo(user.DirectoryPath + "\\" + fileMetainfo.Name);                    
+                {                    
+                    FileInfo file = new FileInfo($"{user.DirectoryPath}\\{fileMetainfo.Name}");                    
                     this.files.Add(file.Name, new ExtendedFileInfo(file, fileMetainfo));
                 }
             }
