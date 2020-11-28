@@ -1,6 +1,8 @@
 ﻿using System;
 using Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands;
+using Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands.Export;
 using Labs.FileStorage.Console.CommandLineParsing.Commands.UserCommands;
+using Labs.FileStorage.Console.Files.Export;
 
 namespace Labs.FileStorage.Console.CommandLineParsing.Commands
 {    
@@ -16,7 +18,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
 
         public static CommandBuilder BuildWithType(String typeOfCommand)
         {
-            CommandType resultType = new CommandType();
+            CommandType resultType;
             switch (typeOfCommand.ToLower())
             {
                 case ("user"):
@@ -110,8 +112,28 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
                         };                       
                         break;
                     }
-                default:
+                case ("file export"):
                     {
+                        if (args.Length > 3)
+                        {
+                            result = new FileExportCommand
+                            {
+                                DestinationPath = args[2],
+                                Format = (ExportFormat)Enum.Parse(typeof(ExportFormat), args[4], true)
+                            };
+                        }
+                        else if (args.Length == 3 && !args[2].StartsWith("-"))
+                        {
+                            result = new FileExportCommand
+                            {
+                                DestinationPath = args[2],
+                                Format = ExportFormat.Json // default format
+                            };
+                        }
+                        else if (args.Length == 3 && args[2].Contains("info"))
+                        {
+                            result = new FileExportInfoCommand();
+                        }
                         break;
                     }
             }                        

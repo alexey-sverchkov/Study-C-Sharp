@@ -17,9 +17,13 @@ namespace Labs.FileStorage.Console.Files
         public uint DownloadsNumber { get; set; }     
         
         // hash of file
+        [System.Text.Json.Serialization.JsonIgnore]
+        [System.Xml.Serialization.XmlIgnore]
         public String Hash { get; set; }
 
         /* Constructors  */
+        public FileMetainformation() 
+        { }
 
         public FileMetainformation(FileInfo file)
         {
