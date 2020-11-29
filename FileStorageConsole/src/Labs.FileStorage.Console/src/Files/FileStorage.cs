@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions;
+using Labs.FileStorage.Console.Exceptions;
 
 namespace Labs.FileStorage.Console.Files
 {

@@ -116,10 +116,20 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
                     {
                         if (args.Length > 3)
                         {
+                            ExportFormat resultFormat;
+                            try
+                            {
+                                resultFormat = (ExportFormat)Enum.Parse(typeof(ExportFormat), args[4], true);
+                            }
+                            catch
+                            {
+                                resultFormat = ExportFormat.NoSpecified;
+                            }
+
                             result = new FileExportCommand
                             {
                                 DestinationPath = args[2],
-                                Format = (ExportFormat)Enum.Parse(typeof(ExportFormat), args[4], true)
+                                Format = resultFormat
                             };
                         }
                         else if (args.Length == 3 && !args[2].StartsWith("-"))

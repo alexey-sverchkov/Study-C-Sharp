@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions;
+using Labs.FileStorage.Console.Exceptions;
 using Labs.FileStorage.Console.Files;
 
 namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
