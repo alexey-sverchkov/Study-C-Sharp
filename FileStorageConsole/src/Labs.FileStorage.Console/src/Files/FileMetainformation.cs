@@ -17,6 +17,7 @@ namespace Labs.FileStorage.Console.Files
         public uint DownloadsNumber { get; set; }     
         
         // hash of file
+        [YamlDotNet.Serialization.YamlIgnore]
         [System.Text.Json.Serialization.JsonIgnore]
         [System.Xml.Serialization.XmlIgnore]
         public String Hash { get; set; }

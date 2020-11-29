@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="9.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Labs.FileStorage.Console">
+      <HintPath>..\Labs.FileStorage.Console\bin\Debug\netcoreapp3.1\Labs.FileStorage.Console.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

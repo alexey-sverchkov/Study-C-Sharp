@@ -8,7 +8,8 @@ namespace Labs.FileStorage.Console.Files.Export
     {
         NoSpecified = 0, // to make sure that we not miss this field to assign
         Json = 1,
-        Xml = 2
+        Xml = 2,
+        Yaml = 3
     }    
 
     public static class ExportFormatExtensions
@@ -35,6 +36,10 @@ namespace Labs.FileStorage.Console.Files.Export
                 {
                     _exportFormats[ExportFormat.Xml] = true;
                 }      
+                else if (item.GetType().Name.ToLower().StartsWith("yaml"))
+                {
+                    _exportFormats[ExportFormat.Yaml] = true;
+                }
 
                 // TODO: add other formats, when they appear
             }

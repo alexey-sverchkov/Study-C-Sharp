@@ -39,9 +39,26 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands.Expo
                             // update all metainformation files
                             exporter.FilesMetainformation = ApplicationContext.Database.GetFilesMetainformation();
                             break;
+                        }                        
+                    }
+                }
+                else if (Format.Equals(ExportFormat.Yaml))
+                {
+                    // search through all metainformation exporters to get the appropriate one
+                    foreach (MetainformationExporter item in ApplicationContext.MetainformationExporters)
+                    {
+                        if (item.GetType().Name.ToLower().StartsWith("yaml"))
+                        {
+                            // copy reference
+                            exporter = item;
+                            // update all metainformation files
+                            exporter.FilesMetainformation = ApplicationContext.Database.GetFilesMetainformation();
+                            break;
                         }
                     }
                 }
+
+                // TODO: add other formats, when they appear
             }
             else
             {
