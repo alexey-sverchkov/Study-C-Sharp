@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Labs.FileStorage.Console">
+      <HintPath>..\Labs.FileStorage.Console\bin\Debug\netcoreapp3.1\Labs.FileStorage.Console.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

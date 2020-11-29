@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using Labs.FileStorage.Console.CommandLineParsing.Commands;
 using Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions;
 using Labs.FileStorage.Console.CommandLineParsing.InitialProgramArguments;
+using Labs.FileStorage.Console.Files.Export;
+using Labs.FileStorage.Console.PluginLoaders;
 using Labs.FileStorage.Console.Users;
 using Microsoft.Extensions.Configuration;
 
@@ -79,7 +82,30 @@ namespace Labs.FileStorage.Console
             {
                 System.Console.WriteLine(ex.Message);
                 return;
-            }                    
+            }
+
+
+            // get all metainformation exporters from assemblies
+            try
+            {
+                List<MetainformationExporter> metainformationExporters = PluginLoader.LoadMetainformationExporters("./plugins/export");
+                ApplicationContext.MetainformationExporters = metainformationExporters;
+                System.Console.WriteLine($"{metainformationExporters.Count} plugin(s) found");
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();               
+
+                /*// uncomment this to see all loaded assemblies
+                foreach (System.Reflection.Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    System.Console.WriteLine(asm.GetName().Name);
+                }*/
+            }
+            catch(Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+                System.Console.WriteLine(ex.StackTrace);
+            }
 
             // program loop
             String currentCommand;
