@@ -27,36 +27,19 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands.Expo
                 {
                     exporter = new JsonMetainformationExporter(ApplicationContext.Database.GetFilesMetainformation());
                 }
-                else if (Format.Equals(ExportFormat.Xml))
-                {
-                    // search through all metainformation exporters to get the appropriate one
-                    foreach(MetainformationExporter item in ApplicationContext.MetainformationExporters)
+                // search through all metainformation exporters to get the appropriate one
+                foreach (MetainformationExporter item in ApplicationContext.MetainformationExporters)
+                {                    
+                    if ((Format.Equals(ExportFormat.Xml) && item.GetType().Name.ToLower().StartsWith("xml")) ||
+                        (Format.Equals(ExportFormat.Yaml) && item.GetType().Name.ToLower().StartsWith("yaml")))
                     {
-                        if (item.GetType().Name.ToLower().StartsWith("xml"))
-                        {
-                            // copy reference
-                            exporter = item;
-                            // update all metainformation files
-                            exporter.FilesMetainformation = ApplicationContext.Database.GetFilesMetainformation();
-                            break;
-                        }                        
+                        // copy reference
+                        exporter = item;
+                        // update all metainformation files
+                        exporter.FilesMetainformation = ApplicationContext.Database.GetFilesMetainformation();
+                        break;
                     }
-                }
-                else if (Format.Equals(ExportFormat.Yaml))
-                {
-                    // search through all metainformation exporters to get the appropriate one
-                    foreach (MetainformationExporter item in ApplicationContext.MetainformationExporters)
-                    {
-                        if (item.GetType().Name.ToLower().StartsWith("yaml"))
-                        {
-                            // copy reference
-                            exporter = item;
-                            // update all metainformation files
-                            exporter.FilesMetainformation = ApplicationContext.Database.GetFilesMetainformation();
-                            break;
-                        }
-                    }
-                }
+                }                
 
                 // TODO: add other formats, when they appear
             }
