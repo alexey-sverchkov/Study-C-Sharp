@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Labs.FileStorage.Console.YamlExporterPlugin
+namespace Labs.FileStorage.Console.Plugins.Export.YamlExporterPlugin
 {
     public class YamlMetainformationExporter : MetainformationExporter
     {
