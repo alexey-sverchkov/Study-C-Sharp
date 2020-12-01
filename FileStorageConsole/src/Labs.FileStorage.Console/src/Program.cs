@@ -88,7 +88,7 @@ namespace Labs.FileStorage.Console
             // get all metainformation exporters from assemblies
             try
             {
-                List<MetainformationExporter> metainformationExporters = PluginLoader.LoadMetainformationExporters("./plugins/export");
+                List<MetainformationExporter> metainformationExporters = PluginLoader.LoadMetainformationExporters("../../../lib");
                 ApplicationContext.MetainformationExporters = metainformationExporters;
                 System.Console.WriteLine($"{metainformationExporters.Count} plugin(s) found");
 

@@ -10,9 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Labs.FileStorage.Console">
-      <HintPath>..\Labs.FileStorage.Console\bin\Debug\netcoreapp3.1\Labs.FileStorage.Console.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Labs.FileStorage.Console\Labs.FileStorage.Console.csproj" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /y /d &quot;$(OutDir)Labs.FileStorage.Console.YamlExporterPlugin.dll&quot; &quot;$(ProjectDir)..\Labs.FileStorage.Console\lib&quot;" />
+  </Target>
 
 </Project>
