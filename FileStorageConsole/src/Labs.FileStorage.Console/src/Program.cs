@@ -17,8 +17,8 @@ namespace Labs.FileStorage.Console
         static void Main(string[] args)
         {
             // get user login and password from cli
-            var startOptions = args.ParseCommandLineArgs(); 
-            
+            var startOptions = args.ParseCommandLineArgs();
+
             // invalid number of parameters
             if (startOptions == null)
             {
@@ -38,13 +38,13 @@ namespace Labs.FileStorage.Console
             String configUsername           = config["User:Login"];
             String configPassword           = config["User:Password"];
             String configCreationDate       = config["User:Creation Date"];
-            String configUsersDirectoryPath = config["Users Directory:Location"];            
+            String configUsersDirectoryPath = config["Users Directory:Location"];
 
 
             // validate username and password
 
             AuthenticationManager authenticator = new AuthenticationManager();
-            authenticator.AddUser(new User(configUsername, configPassword, DateTime.Parse(configCreationDate)));           
+            authenticator.AddUser(new User(configUsername, configPassword, DateTime.Parse(configCreationDate)));
 
             if (!authenticator.IsUserExists(parsedUsername))
             {
@@ -88,18 +88,19 @@ namespace Labs.FileStorage.Console
             // get all metainformation exporters from assemblies
             try
             {
+                // REVIEW: lib folder should come from settings
                 List<MetainformationExporter> metainformationExporters = PluginLoader.LoadMetainformationExporters("../../../lib");
                 ApplicationContext.MetainformationExporters = metainformationExporters;
                 System.Console.WriteLine($"{metainformationExporters.Count} plugin(s) found");
 
                 GC.Collect();
-                GC.WaitForPendingFinalizers();               
+                GC.WaitForPendingFinalizers();
 
-                /*// uncomment this to see all loaded assemblies
+                // uncomment this to see all loaded assemblies
                 foreach (System.Reflection.Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
                 {
                     System.Console.WriteLine(asm.GetName().Name);
-                }*/
+                }
             }
             catch(Exception ex)
             {
@@ -111,7 +112,7 @@ namespace Labs.FileStorage.Console
             String currentCommand;
             while(!(currentCommand = System.Console.ReadLine()).Trim().Equals("exit"))
             {
-                String[] parameters = currentCommand.Split(" ");                
+                String[] parameters = currentCommand.Split(" ");
                 String typeOfCommand = parameters[0];
                 try
                 {
@@ -134,6 +135,6 @@ namespace Labs.FileStorage.Console
                     System.Console.WriteLine(ex.StackTrace);
                 }
             }
-        }                
+        }
     }
 }

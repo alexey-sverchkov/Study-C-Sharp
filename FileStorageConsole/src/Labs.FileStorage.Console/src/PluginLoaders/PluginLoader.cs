@@ -15,7 +15,7 @@ namespace Labs.FileStorage.Console.PluginLoaders
         {
             var pluginsList = new List<MetainformationExporter>();
 
-            var context = new AssemblyLoadContext(name: null, isCollectible: true);            
+            var context = new AssemblyLoadContext(name: null, isCollectible: true);
 
             // 1. read all the dll files from the 'directoryPath' folder
             String[] files = Directory.GetFiles(directoryPath, "*.dll");
@@ -30,21 +30,21 @@ namespace Labs.FileStorage.Console.PluginLoaders
                 // 3. extract all the types that inherit from abstract class MetainformationExporter
                 Type[] pluginTypes = assembly.GetTypes().Where(t => typeof(MetainformationExporter).IsAssignableFrom(t) &&
                                                                                     !t.IsAbstract).ToArray();
-                               
 
                 foreach(Type pluginType in pluginTypes)
                 {
                     // 4. Create an instance from the extracted type
-                    var pluginInstance = Activator.CreateInstance(pluginType, ApplicationContext.Database.GetFilesMetainformation()) 
+                    var pluginInstance = Activator.CreateInstance(pluginType, ApplicationContext.Database.GetFilesMetainformation())
                                                                                 as MetainformationExporter;
                     pluginsList.Add(pluginInstance);
-                }                
-            }            
-            
+                }
+            }
+
             context.Unload();
-            context = null;            
+            // REVIEW: line below is important for removing references to types from unloaded assemblies
+            pluginsList.Clear();
 
             return pluginsList;
-        }       
-    } 
+        }
+    }
 }
