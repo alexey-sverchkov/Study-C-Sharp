@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /d &quot;$(OutDir)Labs.FileStorage.Console.XmlExporterPlugin.dll&quot; &quot;$(ProjectDir)..\Labs.FileStorage.Console\lib&quot;" />
+    <Exec Command="if not exist $(ProjectDir)..\Labs.FileStorage.Console\lib mkdir $(ProjectDir)..\Labs.FileStorage.Console\lib&#xD;&#xA;xcopy /y /d &quot;$(OutDir)Labs.FileStorage.Console.XmlExporterPlugin.dll&quot; &quot;$(ProjectDir)..\Labs.FileStorage.Console\lib&quot;" />
   </Target>
 
 </Project>
