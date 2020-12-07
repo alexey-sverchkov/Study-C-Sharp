@@ -18,7 +18,7 @@ namespace Labs.FileStorage.Console.Files
 
         // calculates hash of file
         // @params:
-        // filename - name of the file for which the hash will be calculated 
+        // filename - name of the file for which the hash will be calculated
         public string CalculateMD5(String filename)
         {
             using (MD5 md5 = MD5.Create())

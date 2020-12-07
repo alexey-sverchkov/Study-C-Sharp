@@ -9,13 +9,13 @@ namespace Labs.FileStorage.Console.Files
         // properties with fields
         public  String   Name { get; set; } // file name
         public  String   Extension { get; set; }
-                
-        public  ulong    SizeInBytes { get; set; }              
+
+        public  ulong    SizeInBytes { get; set; }
 
         public  DateTime CreationDate { get; set; }
-       
-        public uint DownloadsNumber { get; set; }     
-        
+
+        public uint DownloadsNumber { get; set; }
+
         // hash of file
         [YamlDotNet.Serialization.YamlIgnore]
         [System.Text.Json.Serialization.JsonIgnore]
@@ -23,7 +23,7 @@ namespace Labs.FileStorage.Console.Files
         public String Hash { get; set; }
 
         /* Constructors  */
-        public FileMetainformation() 
+        public FileMetainformation()
         { }
 
         public FileMetainformation(FileInfo file)
@@ -44,12 +44,12 @@ namespace Labs.FileStorage.Console.Files
                                          $"extension: {Extension}, " +
                                          $"size: {SizeInBytes} bytes, " + $"creation date: {CreationDate.ToString("F")}, " +
                                          $"number of downloads: {DownloadsNumber}";
-        }                
+        }
 
         // prints metainformation
         // @params:
         // type: 's' - short, includes name, extension and size
-        // type: 'f' - full,  includes name, extension, size, creation date and number of downloads 
+        // type: 'f' - full,  includes name, extension, size, creation date and number of downloads
         public void Print(char type)
         {
             switch (type)
@@ -67,14 +67,14 @@ namespace Labs.FileStorage.Console.Files
                         System.Console.WriteLine($"- file extension: {Extension}");
                         System.Console.WriteLine($"- file size: {SizeInBytes} bytes");
                         System.Console.WriteLine($"- creation date: {CreationDate.ToString("F")}");
-                        System.Console.WriteLine($"- number of downloads: {DownloadsNumber}");                                                
+                        System.Console.WriteLine($"- number of downloads: {DownloadsNumber}");
                         break;
                     }
                 default:
                     {
-                        throw new FormatException($"Error: type {type} is unknown to use Print()");                        
+                        throw new FormatException($"Error: type {type} is unknown to use Print()");
                     }
             }
-        }        
+        }
     }
 }

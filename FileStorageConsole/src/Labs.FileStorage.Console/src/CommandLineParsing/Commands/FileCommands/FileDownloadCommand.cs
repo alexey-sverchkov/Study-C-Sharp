@@ -12,8 +12,8 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
 
         public void Run()
         {
-            ExtendedFileInfo extendedFileInfo = ApplicationContext.FileStorage.GetExtendedFile(FileName);            
-            // file does not exists in destination directory            
+            ExtendedFileInfo extendedFileInfo = ApplicationContext.FileStorage.GetExtendedFile(FileName);
+            // file does not exists in destination directory
             if (!File.Exists($@"{DestinationPath}\{FileName}"))
             {
                 // check file integrity

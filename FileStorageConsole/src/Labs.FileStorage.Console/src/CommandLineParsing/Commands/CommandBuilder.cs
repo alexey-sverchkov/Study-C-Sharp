@@ -5,16 +5,16 @@ using Labs.FileStorage.Console.CommandLineParsing.Commands.UserCommands;
 using Labs.FileStorage.Console.Files.Export;
 
 namespace Labs.FileStorage.Console.CommandLineParsing.Commands
-{    
+{
     public class CommandBuilder
     {
         /* Properties */
         public CommandType TypeOfCommand { get; set; }
         public string TypeOfCommandName => TypeOfCommand.ToString().ToLower();
-        public String Name { get; set; }          
+        public String Name { get; set; }
 
 
-        /* Methods */        
+        /* Methods */
 
         public static CommandBuilder BuildWithType(String typeOfCommand)
         {
@@ -40,10 +40,10 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             return new CommandBuilder
             {
                 TypeOfCommand = resultType,
-                Name = string.Empty,                
+                Name = string.Empty,
             };
-        }        
-       
+        }
+
 
         public virtual bool TryBuild(String[] args, out ICommand result)
         {
@@ -53,16 +53,16 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
             {
                 return false;
             }
-          
+
             // pattern can't match some other command
             if (!args[0].ToLower().Equals(TypeOfCommandName))
             {
                 return false;
             }
 
-            Name = args[1].ToLower();                          
-            
-            // for command with certain type and name try to find corresponding class                                  
+            Name = args[1].ToLower();
+
+            // for command with certain type and name try to find corresponding class
             switch($"{TypeOfCommandName} {Name}")
             {
                 case ("user info"):
@@ -79,37 +79,37 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
                         break;
                     }
                 case ("file remove"):
-                    {                        
+                    {
                         result = new FileRemoveCommand
                         {
                             FileName = args[2]
-                        };                        
+                        };
                         break;
                     }
                 case ("file info"):
-                    {                        
+                    {
                         result = new FileInfoCommand
                         {
                             FileName = args[2]
-                        };                        
+                        };
                         break;
                     }
                 case ("file move"):
-                    {                        
+                    {
                         result = new FileMoveCommand
                         {
                             SourceFileName = args[2],
                             DestinationFileName = args[3]
-                        };                        
+                        };
                         break;
                     }
                 case ("file download"):
-                    {                        
+                    {
                         result = new FileDownloadCommand
                         {
                             FileName = args[2],
                             DestinationPath = args[3]
-                        };                       
+                        };
                         break;
                     }
                 case ("file export"):
@@ -146,13 +146,13 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands
                         }
                         break;
                     }
-            }                        
-            
+            }
+
             // class not found
             if (result == null)
             {
                 return false;
-            }                        
+            }
 
             return true;
         }

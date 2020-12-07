@@ -24,7 +24,7 @@ namespace Labs.FileStorage.Console.Users
         public void AddUser(User user)
         {
             users.Add(user.Login, user);
-        }      
+        }
 
         public bool IsUserExists(String username)
         {

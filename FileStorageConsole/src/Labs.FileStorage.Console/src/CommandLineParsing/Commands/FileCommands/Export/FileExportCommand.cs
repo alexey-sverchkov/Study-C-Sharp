@@ -29,7 +29,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands.Expo
                 }
                 // search through all metainformation exporters to get the appropriate one
                 foreach (MetainformationExporter item in ApplicationContext.MetainformationExporters)
-                {                    
+                {
                     if ((Format.Equals(ExportFormat.Xml) && item.GetType().Name.ToLower().StartsWith("xml")) ||
                         (Format.Equals(ExportFormat.Yaml) && item.GetType().Name.ToLower().StartsWith("yaml")))
                     {
@@ -39,7 +39,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands.Expo
                         exporter.FilesMetainformation = ApplicationContext.Database.GetFilesMetainformation();
                         break;
                     }
-                }                
+                }
 
                 // TODO: add other formats, when they appear
             }
@@ -47,7 +47,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands.Expo
             {
                 throw new FileException($"Error: Format {Format} is unavailable");
             }
-           
+
 
             if (exporter != null)
             {

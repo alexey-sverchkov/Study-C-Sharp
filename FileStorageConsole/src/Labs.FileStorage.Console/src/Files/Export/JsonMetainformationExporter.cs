@@ -7,7 +7,7 @@ namespace Labs.FileStorage.Console.Files.Export
 {
     public class JsonMetainformationExporter : MetainformationExporter
     {
-        public JsonMetainformationExporter(ICollection<FileMetainformation> filesMetainformation) 
+        public JsonMetainformationExporter(ICollection<FileMetainformation> filesMetainformation)
             : base(filesMetainformation)
         {
             Format = ExportFormat.Json;
@@ -22,7 +22,7 @@ namespace Labs.FileStorage.Console.Files.Export
                 {
                     WriteIndented = true
                 };
-                String result = JsonSerializer.Serialize(FilesMetainformation, typeof(HashSet<FileMetainformation>), options);                
+                String result = JsonSerializer.Serialize(FilesMetainformation, typeof(HashSet<FileMetainformation>), options);
                 file.Write(result);
             }
         }

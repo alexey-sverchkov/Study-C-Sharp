@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace Labs.FileStorage.Console.Files
 {
     public class FileManager
-    {               
+    {
         /* Methods */
         public void WriteMetainformationToFile(FileMetainformation fileMetainformation, String filepath)
         {
@@ -33,7 +33,7 @@ namespace Labs.FileStorage.Console.Files
             {
                 ICollection<FileMetainformation> deserializedMetainformation = (ICollection<FileMetainformation>)formatter.Deserialize(fs);
                 return deserializedMetainformation;
-            }            
-        }        
+            }
+        }
     }
 }

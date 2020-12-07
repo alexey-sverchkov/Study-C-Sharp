@@ -1,7 +1,7 @@
 ﻿namespace Labs.FileStorage.Console.CommandLineParsing.Commands.UserCommands
 {
     class UserInfoCommand : ICommand
-    {        
+    {
         public void Run()
         {
             System.Console.WriteLine("login: " + ApplicationContext.User.Login);

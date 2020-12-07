@@ -5,7 +5,7 @@ namespace Labs.FileStorage.Console.Files.Export
 {
     public abstract class MetainformationExporter : IExportable
     {
-        /* Properties and fields */   
+        /* Properties and fields */
         public ExportFormat Format { get; set; }
         public ICollection<FileMetainformation> FilesMetainformation { get; set; }
 
@@ -13,10 +13,10 @@ namespace Labs.FileStorage.Console.Files.Export
         /* Constructors */
         public MetainformationExporter(ICollection<FileMetainformation> filesMetainformation)
         {
-            FilesMetainformation = filesMetainformation;            
+            FilesMetainformation = filesMetainformation;
         }
 
         /* Methods */
-        public abstract void Export(String filename);      
+        public abstract void Export(String filename);
     }
 }

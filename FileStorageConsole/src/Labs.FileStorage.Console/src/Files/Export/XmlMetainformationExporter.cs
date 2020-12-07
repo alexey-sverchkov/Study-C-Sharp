@@ -20,7 +20,7 @@ namespace Labs.FileStorage.Console.Files.Export
             using (FileStream file = File.Create(filename))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(HashSet<FileMetainformation>));
-                serializer.Serialize(file, FilesMetainformation);                
+                serializer.Serialize(file, FilesMetainformation);
             }
         }
     }
