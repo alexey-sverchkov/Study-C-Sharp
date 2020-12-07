@@ -42,7 +42,7 @@ namespace Labs.FileStorage.Console.PluginLoaders
 
             context.Unload();
             // REVIEW: line below is important for removing references to types from unloaded assemblies
-            pluginsList.Clear();
+            //pluginsList.Clear();
 
             return pluginsList;
         }

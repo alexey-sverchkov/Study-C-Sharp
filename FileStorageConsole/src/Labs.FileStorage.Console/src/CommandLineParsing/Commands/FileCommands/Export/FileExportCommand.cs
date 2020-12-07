@@ -21,7 +21,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands.Expo
                 throw new FileException("Error: Unknown format of export");
             }
 
-            if (ExportFormatExtensions.isAvailable(Format))
+            if (ExportFormatExtensions.IsAvailable(Format))
             {
                 if (Format.Equals(ExportFormat.Json))
                 {
