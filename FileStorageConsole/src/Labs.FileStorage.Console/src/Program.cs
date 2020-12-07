@@ -89,18 +89,19 @@ namespace Labs.FileStorage.Console
             try
             {
                 // REVIEW: lib folder should come from settings
-                List<MetainformationExporter> metainformationExporters = PluginLoader.LoadMetainformationExporters("../../../lib");
+                String libraryPath = config["Libraries directory:Location"];
+                List<MetainformationExporter> metainformationExporters = PluginLoader.LoadMetainformationExporters(libraryPath);
                 ApplicationContext.MetainformationExporters = metainformationExporters;
                 System.Console.WriteLine($"{metainformationExporters.Count} plugin(s) found");
 
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
 
-                // uncomment this to see all loaded assemblies
+                /*// uncomment this to see all loaded assemblies
                 foreach (System.Reflection.Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
                 {
                     System.Console.WriteLine(asm.GetName().Name);
-                }
+                }*/
             }
             catch(Exception ex)
             {
