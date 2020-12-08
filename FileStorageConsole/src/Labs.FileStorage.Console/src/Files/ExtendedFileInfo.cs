@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Labs.FileStorage.Console.Files
 {
-    public class ExtendedFileInfo 
+    public class ExtendedFileInfo
     {
         /* Properties */
         public FileInfo FileContent { get; set; }

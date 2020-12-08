@@ -16,7 +16,7 @@ namespace Labs.FileStorage.Console.Users
         {
             Login = login;
             Password = password;
-            CreationDate = creationDate;                                   
+            CreationDate = creationDate;
         }
     }
 }

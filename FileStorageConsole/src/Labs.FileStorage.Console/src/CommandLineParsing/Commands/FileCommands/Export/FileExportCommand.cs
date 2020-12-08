@@ -1,4 +1,4 @@
-﻿using Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions;
+﻿using Labs.FileStorage.Console.Exceptions;
 using Labs.FileStorage.Console.Files.Export;
 using System;
 using System.Collections.Generic;
@@ -15,18 +15,40 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands.Expo
         {
             // switch-case is not supported cuz of ExportFormat is not a constant :(
             MetainformationExporter exporter = null;
-            if (Format.Equals(ExportFormat.Json))
-            {
-                exporter = new JsonMetainformationExporter(ApplicationContext.Database.GetFilesMetainformation());                
-            }
-            else if (Format.Equals(ExportFormat.Xml))
-            {
-                exporter = new XmlMetainformationExporter(ApplicationContext.Database.GetFilesMetainformation());
-            }
-            else if (Format.Equals(ExportFormat.NoSpecified))
+
+            if (Format.Equals(ExportFormat.NoSpecified))
             {
                 throw new FileException("Error: Unknown format of export");
             }
+
+            if (ExportFormatExtensions.IsAvailable(Format))
+            {
+                if (Format.Equals(ExportFormat.Json))
+                {
+                    exporter = new JsonMetainformationExporter(ApplicationContext.Database.GetFilesMetainformation());
+                }
+                // search through all metainformation exporters to get the appropriate one
+                foreach (MetainformationExporter item in ApplicationContext.MetainformationExporters)
+                {
+                    if ((Format.Equals(ExportFormat.Xml) && item.GetType().Name.ToLower().StartsWith("xml")) ||
+                        (Format.Equals(ExportFormat.Yaml) && item.GetType().Name.ToLower().StartsWith("yaml")))
+                    {
+                        // copy reference
+                        exporter = item;
+                        // update all metainformation files
+                        exporter.FilesMetainformation = ApplicationContext.Database.GetFilesMetainformation();
+                        break;
+                    }
+                }
+
+                // TODO: add other formats, when they appear
+            }
+            else
+            {
+                throw new FileException($"Error: Format {Format} is unavailable");
+            }
+
+
             if (exporter != null)
             {
                 exporter.Export(DestinationPath);

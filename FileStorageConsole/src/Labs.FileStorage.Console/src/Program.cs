@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using Labs.FileStorage.Console.CommandLineParsing.Commands;
-using Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions;
 using Labs.FileStorage.Console.CommandLineParsing.InitialProgramArguments;
+using Labs.FileStorage.Console.Exceptions;
+using Labs.FileStorage.Console.Files.Export;
+using Labs.FileStorage.Console.PluginLoaders;
 using Labs.FileStorage.Console.Users;
 using Microsoft.Extensions.Configuration;
 
@@ -14,8 +17,8 @@ namespace Labs.FileStorage.Console
         static void Main(string[] args)
         {
             // get user login and password from cli
-            var startOptions = args.ParseCommandLineArgs(); 
-            
+            var startOptions = args.ParseCommandLineArgs();
+
             // invalid number of parameters
             if (startOptions == null)
             {
@@ -35,13 +38,13 @@ namespace Labs.FileStorage.Console
             String configUsername           = config["User:Login"];
             String configPassword           = config["User:Password"];
             String configCreationDate       = config["User:Creation Date"];
-            String configUsersDirectoryPath = config["Users Directory:Location"];            
+            String configUsersDirectoryPath = config["Users Directory:Location"];
 
 
             // validate username and password
 
             AuthenticationManager authenticator = new AuthenticationManager();
-            authenticator.AddUser(new User(configUsername, configPassword, DateTime.Parse(configCreationDate)));           
+            authenticator.AddUser(new User(configUsername, configPassword, DateTime.Parse(configCreationDate)));
 
             if (!authenticator.IsUserExists(parsedUsername))
             {
@@ -79,13 +82,37 @@ namespace Labs.FileStorage.Console
             {
                 System.Console.WriteLine(ex.Message);
                 return;
-            }                    
+            }
+
+
+            // get all metainformation exporters from assemblies
+            try
+            {
+                String libraryPath = config["Libraries directory:Location"];
+                List<MetainformationExporter> metainformationExporters = PluginLoader.LoadMetainformationExporters(libraryPath);
+                ApplicationContext.MetainformationExporters = metainformationExporters;
+                System.Console.WriteLine($"{metainformationExporters.Count} plugin(s) found");
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                /*// uncomment this to see all loaded assemblies
+                foreach (System.Reflection.Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    System.Console.WriteLine(asm.GetName().Name);
+                }*/
+            }
+            catch(Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+                System.Console.WriteLine(ex.StackTrace);
+            }
 
             // program loop
             String currentCommand;
             while(!(currentCommand = System.Console.ReadLine()).Trim().Equals("exit"))
             {
-                String[] parameters = currentCommand.Split(" ");                
+                String[] parameters = currentCommand.Split(" ");
                 String typeOfCommand = parameters[0];
                 try
                 {
@@ -108,6 +135,6 @@ namespace Labs.FileStorage.Console
                     System.Console.WriteLine(ex.StackTrace);
                 }
             }
-        }                
+        }
     }
 }

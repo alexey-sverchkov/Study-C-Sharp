@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Labs.FileStorage.Console\Labs.FileStorage.Console.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if not exist $(ProjectDir)..\Labs.FileStorage.Console\lib mkdir $(ProjectDir)..\Labs.FileStorage.Console\lib&#xD;&#xA;xcopy /y /d &quot;$(OutDir)Labs.FileStorage.Console.XmlExporterPlugin.dll&quot; &quot;$(ProjectDir)..\Labs.FileStorage.Console\lib&quot;" />
+  </Target>
+
+</Project>

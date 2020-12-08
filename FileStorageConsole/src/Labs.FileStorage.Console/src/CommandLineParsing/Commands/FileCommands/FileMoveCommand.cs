@@ -4,7 +4,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
 {
     public class FileMoveCommand : ICommand
     {
-        public String SourceFileName { get; set; }        
+        public String SourceFileName { get; set; }
         public String DestinationFileName { get; set; }
 
         public void Run()

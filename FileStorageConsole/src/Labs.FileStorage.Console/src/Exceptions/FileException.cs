@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions
-{    
+namespace Labs.FileStorage.Console.Exceptions
+{
     [Serializable]
     public class FileException : Exception
     {
-        public FileException() 
+        public FileException()
         { }
 
         public FileException(String message)

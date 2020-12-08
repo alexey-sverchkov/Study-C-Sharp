@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using Labs.FileStorage.Console.CommandLineParsing.Commands.Exceptions;
+using Labs.FileStorage.Console.Exceptions;
 
 namespace Labs.FileStorage.Console.Files
 {
@@ -16,8 +16,8 @@ namespace Labs.FileStorage.Console.Files
 
         /* Properties and Fields */
         private readonly Dictionary<String, ExtendedFileInfo> files = new Dictionary<String, ExtendedFileInfo>();
-        private readonly User user;    
-        
+        private readonly User user;
+
 
         /* Constructors */
 
@@ -25,8 +25,8 @@ namespace Labs.FileStorage.Console.Files
         {
             String maxFileSizeStr     = ConfigurationManager.AppSettings["storageMaxFileSize"];
             String storageCapacityStr = ConfigurationManager.AppSettings["storageCapacity"];
-            MAX_FILE_SIZE = ByteSize.Parse(maxFileSizeStr);            
-            STORAGE_CAPACITY = ByteSize.Parse(storageCapacityStr);            
+            MAX_FILE_SIZE = ByteSize.Parse(maxFileSizeStr);
+            STORAGE_CAPACITY = ByteSize.Parse(storageCapacityStr);
         }
 
         public FileStorage(User user, String usersDirectoryPath, String databaseLocation)
@@ -35,7 +35,7 @@ namespace Labs.FileStorage.Console.Files
             DirectoryInfo   directoryInfo = new DirectoryInfo(usersDirectoryPath);
             DirectoryInfo[] subDirectories = directoryInfo.GetDirectories();
 
-            bool isUserDirectoryExists = false; // user folder doesn't exist 
+            bool isUserDirectoryExists = false; // user folder doesn't exist
             foreach (DirectoryInfo currentSubDirectory in subDirectories)
             {
                 if (currentSubDirectory.Name.Equals(user.Login))
@@ -51,8 +51,8 @@ namespace Labs.FileStorage.Console.Files
                 FileManager fm = new FileManager();
                 ICollection<FileMetainformation> filesMetainfo = fm.GetMetainformationFromFile(databaseLocation);
                 foreach (FileMetainformation fileMetainfo in filesMetainfo)
-                {                    
-                    FileInfo file = new FileInfo($"{user.DirectoryPath}\\{fileMetainfo.Name}");                    
+                {
+                    FileInfo file = new FileInfo($"{user.DirectoryPath}\\{fileMetainfo.Name}");
                     this.files.Add(file.Name, new ExtendedFileInfo(file, fileMetainfo));
                 }
             }
@@ -65,18 +65,18 @@ namespace Labs.FileStorage.Console.Files
         }
 
         /* Methods */
-        
+
         // returns used size of storage
         public ulong GetSize()
-        {               
+        {
             // pair - <String, ExtendedFileInfo>
             return (ulong)files.Sum(pair => (decimal)pair.Value.Metainformation.SizeInBytes);
         }
-        
+
         public bool Contains(FileInfo file)
         {
             return files.ContainsKey(file.Name);
-        }        
+        }
 
         public void Add(FileInfo file)
         {
@@ -85,7 +85,7 @@ namespace Labs.FileStorage.Console.Files
             {
                 if (!Contains(file))
                 {
-                    files.Add(file.Name, new ExtendedFileInfo(file, new FileMetainformation(file)));                                      
+                    files.Add(file.Name, new ExtendedFileInfo(file, new FileMetainformation(file)));
                     File.Copy(file.FullName, user.DirectoryPath + "\\" + file.Name);
                 }
                 else
@@ -97,7 +97,7 @@ namespace Labs.FileStorage.Console.Files
             {
                 throw new FileException("File size is too large to upload");
             }
-        }        
+        }
 
         public void Remove(FileInfo file)
         {
@@ -105,7 +105,7 @@ namespace Labs.FileStorage.Console.Files
             if (files.ContainsKey(file.Name))
             {
                 files.Remove(file.Name);
-                File.Delete(user.DirectoryPath + "\\" + file.Name);                
+                File.Delete(user.DirectoryPath + "\\" + file.Name);
             }
             else
             {
@@ -168,20 +168,20 @@ namespace Labs.FileStorage.Console.Files
         {
             if (Contains(new FileInfo("./" + sourceFileName)))
             {
-                ExtendedFileInfo extendedFileInfo = new ExtendedFileInfo(files[sourceFileName].FileContent, files[sourceFileName].Metainformation);                
+                ExtendedFileInfo extendedFileInfo = new ExtendedFileInfo(files[sourceFileName].FileContent, files[sourceFileName].Metainformation);
 
                 // rename binary file in storage and user folder
                 extendedFileInfo.FileContent.MoveTo(user.DirectoryPath + "\\" + destinationFileName);
-                // update file name in file metainformation                
+                // update file name in file metainformation
                 extendedFileInfo.Metainformation.Name = destinationFileName;
                 // update file extension in file metainformation
-                extendedFileInfo.Metainformation.Extension = extendedFileInfo.FileContent.Extension;                
+                extendedFileInfo.Metainformation.Extension = extendedFileInfo.FileContent.Extension;
 
                 // remove old entry from collection
                 files.Remove(sourceFileName);
 
                 // add new entry to collection
-                files.Add(destinationFileName, extendedFileInfo);                                              
+                files.Add(destinationFileName, extendedFileInfo);
             }
             else
             {
