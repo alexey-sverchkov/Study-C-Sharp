@@ -45,7 +45,6 @@ namespace Labs.FileStorage.Console.Files.Export
             }
         }
 
-        // REVIEW: method name should start from capital letter.
         public static bool IsAvailable(ExportFormat exportFormat)
         {
             return _exportFormats[exportFormat];
