@@ -15,17 +15,15 @@ namespace Labs.FileStorage.Console.PluginLoaders
         {
             var pluginsList = new List<MetainformationExporter>();
 
-            var context = new AssemblyLoadContext(name: null, isCollectible: true);
-
             // 1. read all the dll files from the 'directoryPath' folder
             String[] files = Directory.GetFiles(directoryPath, "*.dll");
 
             // 2. read the assembly from files
             foreach(String file in files)
             {
-                //Assembly assembly = Assembly.LoadFrom(Path.Combine(Directory.GetCurrentDirectory(), file));
-                Assembly assembly = context.LoadFromAssemblyPath(Path.Combine(Directory.GetCurrentDirectory(), file));
+                var context = new AssemblyLoadContext(name: null, isCollectible: true);
 
+                Assembly assembly = context.LoadFromAssemblyPath(Path.Combine(Directory.GetCurrentDirectory(), file));
 
                 // 3. extract all the types that inherit from abstract class MetainformationExporter
                 Type[] pluginTypes = assembly.GetTypes().Where(t => typeof(MetainformationExporter).IsAssignableFrom(t) &&
@@ -38,11 +36,9 @@ namespace Labs.FileStorage.Console.PluginLoaders
                                                                                 as MetainformationExporter;
                     pluginsList.Add(pluginInstance);
                 }
-            }
 
-            context.Unload();
-            // REVIEW: line below is important for removing references to types from unloaded assemblies
-            //pluginsList.Clear();
+                context.Unload();
+            }
 
             return pluginsList;
         }
