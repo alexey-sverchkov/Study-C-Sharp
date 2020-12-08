@@ -88,7 +88,6 @@ namespace Labs.FileStorage.Console
             // get all metainformation exporters from assemblies
             try
             {
-                // REVIEW: lib folder should come from settings
                 String libraryPath = config["Libraries directory:Location"];
                 List<MetainformationExporter> metainformationExporters = PluginLoader.LoadMetainformationExporters(libraryPath);
                 ApplicationContext.MetainformationExporters = metainformationExporters;
