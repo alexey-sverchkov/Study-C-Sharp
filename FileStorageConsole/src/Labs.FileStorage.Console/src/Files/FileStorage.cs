@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using Labs.FileStorage.Console.Domain.Files;
 using Labs.FileStorage.Console.Exceptions;
 
 namespace Labs.FileStorage.Console.Files
@@ -170,7 +171,7 @@ namespace Labs.FileStorage.Console.Files
             {
                 ExtendedFileInfo extendedFileInfo = new ExtendedFileInfo(files[sourceFileName].FileContent, files[sourceFileName].Metainformation);
 
-                // rename binary file in storage and user folder
+                // rename binary file in storage and user folder //TODO not working
                 extendedFileInfo.FileContent.MoveTo(user.DirectoryPath + "\\" + destinationFileName);
                 // update file name in file metainformation
                 extendedFileInfo.Metainformation.Name = destinationFileName;

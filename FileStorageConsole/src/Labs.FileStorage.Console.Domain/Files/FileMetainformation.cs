@@ -1,18 +1,18 @@
 ﻿using System;
 using System.IO;
 
-namespace Labs.FileStorage.Console.Files
+namespace Labs.FileStorage.Console.Domain.Files
 {
     [Serializable]
     public class FileMetainformation
     {
         // properties with fields
-        public  String   Name { get; set; } // file name
-        public  String   Extension { get; set; }
+        public String Name { get; set; } // file name
+        public String Extension { get; set; }
 
-        public  ulong    SizeInBytes { get; set; }
+        public ulong SizeInBytes { get; set; }
 
-        public  DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public uint DownloadsNumber { get; set; }
 

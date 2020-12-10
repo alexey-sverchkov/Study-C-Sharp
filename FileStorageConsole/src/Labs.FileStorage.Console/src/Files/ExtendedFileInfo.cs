@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Labs.FileStorage.Console.Domain.Files;
 
 namespace Labs.FileStorage.Console.Files
 {
@@ -13,7 +14,8 @@ namespace Labs.FileStorage.Console.Files
 
         public ExtendedFileInfo(FileInfo fileContent, FileMetainformation metainformation)
         {
-            FileContent = fileContent;
+            //FileContent = fileContent;
+            FileContent = new FileInfo($"{ApplicationContext.User.DirectoryPath}\\{fileContent.Name}");
             Metainformation = metainformation;
         }
 

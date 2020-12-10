@@ -1,9 +1,9 @@
-﻿using Labs.FileStorage.Console.Files;
-using Labs.FileStorage.Console.Files.Export;
+﻿using Labs.FileStorage.Console.Files.Export;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using Labs.FileStorage.Console.Domain.Files;
 
 namespace Labs.FileStorage.Console.Plugins.Export.XmlExporterPlugin
 {

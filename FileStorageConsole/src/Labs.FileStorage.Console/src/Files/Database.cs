@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Labs.FileStorage.Console.Domain.Files;
 
 namespace Labs.FileStorage.Console.Files
 {
@@ -24,7 +25,7 @@ namespace Labs.FileStorage.Console.Files
         public HashSet<FileMetainformation> GetFilesMetainformation()
         {
             FileManager fm = new FileManager();
-            HashSet<FileMetainformation> collection = (HashSet<FileMetainformation>)fm.GetMetainformationFromFile(Path);
+            HashSet<FileMetainformation> collection = new HashSet<FileMetainformation>(fm.GetMetainformationFromFile(Path));
             return collection;
         }
     }

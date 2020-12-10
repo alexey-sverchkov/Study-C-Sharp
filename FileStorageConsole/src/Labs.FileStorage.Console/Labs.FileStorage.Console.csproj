@@ -18,6 +18,7 @@
     <Content Include="src\appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <ProjectReference Include="..\Labs.FileStorage.Console.Domain\Labs.FileStorage.Console.Domain.csproj" />
     <None Update="database\database.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

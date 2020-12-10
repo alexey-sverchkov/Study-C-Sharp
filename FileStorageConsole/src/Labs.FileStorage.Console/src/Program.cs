@@ -4,7 +4,9 @@ using System.Configuration;
 using System.IO;
 using Labs.FileStorage.Console.CommandLineParsing.Commands;
 using Labs.FileStorage.Console.CommandLineParsing.InitialProgramArguments;
+using Labs.FileStorage.Console.Domain.Files; // TODO: delete it
 using Labs.FileStorage.Console.Exceptions;
+using Labs.FileStorage.Console.Files; // TODO: delete it
 using Labs.FileStorage.Console.Files.Export;
 using Labs.FileStorage.Console.PluginLoaders;
 using Labs.FileStorage.Console.Users;
@@ -70,7 +72,6 @@ namespace Labs.FileStorage.Console
             // create Database
             Files.Database database = new Files.Database { Path = pathOfDatabase };
             ApplicationContext.Database = database;
-
 
             try
             {

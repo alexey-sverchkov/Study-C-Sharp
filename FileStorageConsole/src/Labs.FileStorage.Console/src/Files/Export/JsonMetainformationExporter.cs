@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using Labs.FileStorage.Console.Domain.Files;
 
 namespace Labs.FileStorage.Console.Files.Export
 {
