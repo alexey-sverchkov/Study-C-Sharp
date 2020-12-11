@@ -11,7 +11,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
         {
             ApplicationContext.FileStorage.ChangeFileName(SourceFileName, DestinationFileName);
             // update database
-            ApplicationContext.Database.Update();
+            ApplicationContext.Database.SyncWith(ApplicationContext.FileStorage);
             System.Console.WriteLine($"The file {SourceFileName} has been moved to {DestinationFileName}");
         }
     }

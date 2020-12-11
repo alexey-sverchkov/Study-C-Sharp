@@ -4,10 +4,8 @@ using System.Configuration;
 using System.IO;
 using Labs.FileStorage.Console.CommandLineParsing.Commands;
 using Labs.FileStorage.Console.CommandLineParsing.InitialProgramArguments;
-using Labs.FileStorage.Console.Domain.Files;
-using Labs.FileStorage.Console.Domain.Users; // TODO: delete it
+using Labs.FileStorage.Console.Domain.Users;
 using Labs.FileStorage.Console.Exceptions;
-using Labs.FileStorage.Console.Files; // TODO: delete it
 using Labs.FileStorage.Console.Files.Export;
 using Labs.FileStorage.Console.PluginLoaders;
 using Labs.FileStorage.Console.Users;

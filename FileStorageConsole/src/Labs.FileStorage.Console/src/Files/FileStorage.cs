@@ -172,7 +172,7 @@ namespace Labs.FileStorage.Console.Files
             {
                 ExtendedFileInfo extendedFileInfo = new ExtendedFileInfo(files[sourceFileName].FileContent.Name, user.DirectoryPath, files[sourceFileName].Metainformation);
 
-                // rename binary file in storage and user folder //TODO not working
+                // rename binary file in storage and user folder
                 extendedFileInfo.FileContent.MoveTo(user.DirectoryPath + "\\" + destinationFileName);
                 // update file name in file metainformation
                 extendedFileInfo.Metainformation.Name = destinationFileName;

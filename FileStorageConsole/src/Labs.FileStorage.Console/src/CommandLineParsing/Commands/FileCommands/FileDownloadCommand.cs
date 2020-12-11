@@ -25,7 +25,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
                     // increase number of downloads of file
                     extendedFileInfo.Metainformation.DownloadsNumber++;
                     // update database
-                    ApplicationContext.Database.Update();
+                    ApplicationContext.Database.SyncWith(ApplicationContext.FileStorage);
                     System.Console.WriteLine($"The file {FileName} has been downloaded");
                 }
                 else

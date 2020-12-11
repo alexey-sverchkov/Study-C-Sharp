@@ -15,10 +15,10 @@ namespace Labs.FileStorage.Console.Files
         }
 
         /* Methods */
-        public void Update()
+        public void SyncWith(FileStorage storage)
         {
             FileManager fm = new FileManager();
-            fm.WriteMetainformationToFile(ApplicationContext.FileStorage.GetFilesMetainformation(), ApplicationContext.Database.Path);
+            fm.WriteMetainformationToFile(storage.GetFilesMetainformation(), Path);
         }
 
         // get all files metainformation from database

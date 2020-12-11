@@ -15,7 +15,7 @@ namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
 
             ApplicationContext.FileStorage.Add(fileToUpload);
             // update database
-            ApplicationContext.Database.Update();
+            ApplicationContext.Database.SyncWith(ApplicationContext.FileStorage);
             System.Console.WriteLine($"The file {PathToFile} has been uploaded");
             FileMetainformation fm = ApplicationContext.FileStorage.GetFileMetainformationFrom(fileToUpload);
             fm.Print('s');
