@@ -4,8 +4,8 @@ using System.Configuration;
 using System.IO;
 using Labs.FileStorage.Console.CommandLineParsing.Commands;
 using Labs.FileStorage.Console.CommandLineParsing.InitialProgramArguments;
+using Labs.FileStorage.Console.Domain.Exceptions;
 using Labs.FileStorage.Console.Domain.Users;
-using Labs.FileStorage.Console.Exceptions;
 using Labs.FileStorage.Console.Files.Export;
 using Labs.FileStorage.Console.PluginLoaders;
 using Labs.FileStorage.Console.Users;
@@ -69,13 +69,13 @@ namespace Labs.FileStorage.Console
             String pathOfDatabase = ConfigurationManager.AppSettings["databaseLocation"];
 
             // create Database
-            Files.Database database = new Files.Database { Path = pathOfDatabase };
+            Data.Files.Database database = new Data.Files.Database { Path = pathOfDatabase };
             ApplicationContext.Database = database;
 
             try
             {
                 // create file storage
-                Files.FileStorage fileStorage = new Files.FileStorage(user, configUsersDirectoryPath, pathOfDatabase);
+                Data.Files.FileStorage fileStorage = new Data.Files.FileStorage(user, configUsersDirectoryPath, pathOfDatabase);
                 ApplicationContext.FileStorage = fileStorage;
             }
             catch(Exception ex)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Labs.FileStorage.Console.Domain.Files;
 
-namespace Labs.FileStorage.Console.Files
+namespace Labs.FileStorage.Console.Data.Files
 {
     public class Database
     {

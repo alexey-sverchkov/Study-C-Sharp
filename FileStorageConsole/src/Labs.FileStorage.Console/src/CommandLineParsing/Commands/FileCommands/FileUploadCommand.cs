@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Labs.FileStorage.Console.Domain.Files;
-using Labs.FileStorage.Console.Files;
 
 namespace Labs.FileStorage.Console.CommandLineParsing.Commands.FileCommands
 {

@@ -1,15 +1,14 @@
 ﻿using System;
 using ByteSizeLib;
-using Labs.FileStorage.Console.Users;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using Labs.FileStorage.Console.Domain.Exceptions;
 using Labs.FileStorage.Console.Domain.Files;
 using Labs.FileStorage.Console.Domain.Users;
-using Labs.FileStorage.Console.Exceptions;
 
-namespace Labs.FileStorage.Console.Files
+namespace Labs.FileStorage.Console.Data.Files
 {
     public class FileStorage
     {

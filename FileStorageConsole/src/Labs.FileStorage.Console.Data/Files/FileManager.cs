@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Labs.FileStorage.Console.Domain.Files;
 
-namespace Labs.FileStorage.Console.Files
+namespace Labs.FileStorage.Console.Data.Files
 {
     public class FileManager
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Labs.FileStorage.Console.Exceptions
+namespace Labs.FileStorage.Console.Domain.Exceptions
 {
     [Serializable]
     public class FileException : Exception
