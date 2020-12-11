@@ -12,10 +12,16 @@ namespace Labs.FileStorage.Console.Files
 
         /* Constructors */
 
-        public ExtendedFileInfo(FileInfo fileContent, FileMetainformation metainformation)
+        /*public ExtendedFileInfo(FileInfo fileContent, FileMetainformation metainformation)
         {
             //FileContent = fileContent;
             FileContent = new FileInfo($"{ApplicationContext.User.DirectoryPath}\\{fileContent.Name}");
+            Metainformation = metainformation;
+        }*/
+
+        public ExtendedFileInfo(String filename, String userDirectoryPath, FileMetainformation metainformation)
+        {
+            FileContent = new FileInfo($"{userDirectoryPath}\\{filename}");
             Metainformation = metainformation;
         }
 

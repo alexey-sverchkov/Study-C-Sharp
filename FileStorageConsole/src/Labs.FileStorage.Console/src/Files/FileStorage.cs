@@ -54,7 +54,7 @@ namespace Labs.FileStorage.Console.Files
                 foreach (FileMetainformation fileMetainfo in filesMetainfo)
                 {
                     FileInfo file = new FileInfo($"{user.DirectoryPath}\\{fileMetainfo.Name}");
-                    this.files.Add(file.Name, new ExtendedFileInfo(file, fileMetainfo));
+                    this.files.Add(file.Name, new ExtendedFileInfo(file.Name, user.DirectoryPath, fileMetainfo));
                 }
             }
             else
@@ -86,7 +86,7 @@ namespace Labs.FileStorage.Console.Files
             {
                 if (!Contains(file))
                 {
-                    files.Add(file.Name, new ExtendedFileInfo(file, new FileMetainformation(file)));
+                    files.Add(file.Name, new ExtendedFileInfo(file.Name, user.DirectoryPath, new FileMetainformation(file)));
                     File.Copy(file.FullName, user.DirectoryPath + "\\" + file.Name);
                 }
                 else
@@ -169,7 +169,7 @@ namespace Labs.FileStorage.Console.Files
         {
             if (Contains(new FileInfo("./" + sourceFileName)))
             {
-                ExtendedFileInfo extendedFileInfo = new ExtendedFileInfo(files[sourceFileName].FileContent, files[sourceFileName].Metainformation);
+                ExtendedFileInfo extendedFileInfo = new ExtendedFileInfo(files[sourceFileName].FileContent.Name, user.DirectoryPath, files[sourceFileName].Metainformation);
 
                 // rename binary file in storage and user folder //TODO not working
                 extendedFileInfo.FileContent.MoveTo(user.DirectoryPath + "\\" + destinationFileName);
