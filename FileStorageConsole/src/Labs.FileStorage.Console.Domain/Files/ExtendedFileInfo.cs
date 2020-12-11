@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
-using Labs.FileStorage.Console.Domain.Files;
 
-namespace Labs.FileStorage.Console.Files
+namespace Labs.FileStorage.Console.Domain.Files
 {
     public class ExtendedFileInfo
     {

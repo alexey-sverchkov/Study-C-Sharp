@@ -6,6 +6,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using Labs.FileStorage.Console.Domain.Files;
+using Labs.FileStorage.Console.Domain.Users;
 using Labs.FileStorage.Console.Exceptions;
 
 namespace Labs.FileStorage.Console.Files

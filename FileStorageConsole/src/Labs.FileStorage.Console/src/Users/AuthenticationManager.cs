@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Labs.FileStorage.Console.Domain.Users;
 
 namespace Labs.FileStorage.Console.Users
 {
