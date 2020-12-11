@@ -17,9 +17,6 @@
     </Content>
     <ProjectReference Include="..\Labs.FileStorage.Console.Data\Labs.FileStorage.Console.Data.csproj" />
     <ProjectReference Include="..\Labs.FileStorage.Console.Domain\Labs.FileStorage.Console.Domain.csproj" />
-    <None Update="database\database.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
