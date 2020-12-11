@@ -1,10 +1,10 @@
-﻿using Labs.FileStorage.Console.Files.Export;
+﻿using Labs.FileStorage.Console.Business.Files.Export;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Labs.FileStorage.Console.Domain.Files;
+using Labs.FileStorage.Console.Business.Domain.Files;
 
-namespace Labs.FileStorage.Console.Plugins.Export.YamlExporterPlugin
+namespace Labs.FileStorage.Console.Business.Plugins.Export.YamlExporterPlugin
 {
     public class YamlMetainformationExporter : MetainformationExporter
     {

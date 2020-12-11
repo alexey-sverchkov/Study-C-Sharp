@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 
-namespace Labs.FileStorage.Console.Domain.Files
+namespace Labs.FileStorage.Console.Business.Domain.Files
 {
     public class FileIntegrityChecker
     {

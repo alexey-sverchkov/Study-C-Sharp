@@ -10,11 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Labs.FileStorage.Console\Labs.FileStorage.Console.csproj" />
+    <ProjectReference Include="..\Labs.FileStorage.Console.Business\Labs.FileStorage.Console.Business.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if not exist $(ProjectDir)..\Labs.FileStorage.Console\lib mkdir $(ProjectDir)..\Labs.FileStorage.Console\lib&#xD;&#xA;xcopy /y /d &quot;$(OutDir)Labs.FileStorage.Console.YamlExporterPlugin.dll&quot; &quot;$(ProjectDir)..\Labs.FileStorage.Console\lib&quot;" />
+    <Exec Command="if not exist $(ProjectDir)..\Labs.FileStorage.Console.Business\lib mkdir $(ProjectDir)..\Labs.FileStorage.Console.Business\lib&#xD;&#xA;xcopy /y /d &quot;$(OutDir)Labs.FileStorage.Console.YamlExporterPlugin.dll&quot; &quot;$(ProjectDir)..\Labs.FileStorage.Console.Business\lib&quot;" />
   </Target>
 
 </Project>

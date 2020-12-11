@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using Labs.FileStorage.Console.Domain.Exceptions;
-using Labs.FileStorage.Console.Domain.Files;
-using Labs.FileStorage.Console.Domain.Users;
+using Labs.FileStorage.Console.Business.Domain.Exceptions;
+using Labs.FileStorage.Console.Business.Domain.Files;
+using Labs.FileStorage.Console.Business.Domain.Users;
 
-namespace Labs.FileStorage.Console.Data.Files
+namespace Labs.FileStorage.Console.Business.Data.Files
 {
     public class FileStorage
     {

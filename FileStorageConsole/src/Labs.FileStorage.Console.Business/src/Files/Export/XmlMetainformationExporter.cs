@@ -1,11 +1,10 @@
-﻿using Labs.FileStorage.Console.Business.Files.Export;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using Labs.FileStorage.Console.Business.Domain.Files;
 
-namespace Labs.FileStorage.Console.Business.Plugins.Export.XmlExporterPlugin
+namespace Labs.FileStorage.Console.Business.Files.Export
 {
     public class XmlMetainformationExporter : MetainformationExporter
     {
