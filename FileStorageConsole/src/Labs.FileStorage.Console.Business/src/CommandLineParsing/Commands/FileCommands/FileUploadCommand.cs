@@ -12,7 +12,7 @@ namespace Labs.FileStorage.Console.Business.CommandLineParsing.Commands.FileComm
         {
             FileInfo fileToUpload = new FileInfo(PathToFile);
 
-            ApplicationContext.FileStorage.Add(fileToUpload);
+            ApplicationContext.FileStorage.Insert(fileToUpload);
             // update database
             ApplicationContext.Database.SyncWith(ApplicationContext.FileStorage);
             System.Console.WriteLine($"The file {PathToFile} has been uploaded");

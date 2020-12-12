@@ -10,7 +10,7 @@ using Labs.FileStorage.Console.Domain.Users;
 
 namespace Labs.FileStorage.Console.Data.Files
 {
-    public class FileStorage
+    public class FileStorage : IRepository<FileInfo>
     {
         private static readonly ByteSize MAX_FILE_SIZE;     // max file size in bytes
         private static readonly ByteSize STORAGE_CAPACITY;  // total capacity of user storage
@@ -79,7 +79,7 @@ namespace Labs.FileStorage.Console.Data.Files
             return files.ContainsKey(file.Name);
         }
 
-        public void Add(FileInfo file)
+        public void Insert(FileInfo file)
         {
             ByteSize sizeOfFile = new ByteSize(file.Length);
             if (sizeOfFile < MAX_FILE_SIZE)
@@ -100,8 +100,9 @@ namespace Labs.FileStorage.Console.Data.Files
             }
         }
 
-        public void Remove(FileInfo file)
+        public void Delete(FileInfo file)
         {
+
             // file exists in storage
             if (files.ContainsKey(file.Name))
             {
@@ -114,16 +115,28 @@ namespace Labs.FileStorage.Console.Data.Files
             }
         }
 
-
-        public HashSet<ExtendedFileInfo> GetExtendedFiles()
+        public IEnumerable<FileInfo> GetCollection()
         {
-            HashSet<ExtendedFileInfo> collection = new HashSet<ExtendedFileInfo>();
+            HashSet<FileInfo> collection = new HashSet<FileInfo>();
             // add only files
-            foreach(var pair in files)
+            foreach (var pair in files)
             {
-                collection.Add(pair.Value);
+                collection.Add(pair.Value.FileContent);
             }
             return collection;
+        }
+
+        public FileInfo GetById(object id)
+        {
+            String filename = (String)id;
+            if (files.ContainsKey(filename))
+            {
+                return files[filename].FileContent;
+            }
+            else
+            {
+                throw new FileException($"File {filename} does not found in the storage");
+            }
         }
 
         public ExtendedFileInfo GetExtendedFile(String filename)

@@ -10,7 +10,7 @@ namespace Labs.FileStorage.Console.Business.CommandLineParsing.Commands.FileComm
         public void Run()
         {
             FileInfo file = new FileInfo("./" + FileName);
-            ApplicationContext.FileStorage.Remove(file);
+            ApplicationContext.FileStorage.Delete(file);
             // update database
             ApplicationContext.Database.SyncWith(ApplicationContext.FileStorage);
             System.Console.WriteLine($"the file {FileName} has been removed");

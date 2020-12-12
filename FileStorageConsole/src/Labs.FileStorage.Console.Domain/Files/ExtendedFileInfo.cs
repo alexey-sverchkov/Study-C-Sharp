@@ -17,6 +17,8 @@ namespace Labs.FileStorage.Console.Domain.Files
             Metainformation = metainformation;
         }
 
+        /* Methods */
+
         public override String ToString()
         {
             return $"ExtendedFileInfo [{FileContent.ToString()}, {Metainformation.ToString()}]";
