@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
-using Labs.FileStorage.Console.Business.Domain.Files;
+using Labs.FileStorage.Console.Domain.Files;
 
 namespace Labs.FileStorage.Console.Business.Plugins.Export.XmlExporterPlugin
 {

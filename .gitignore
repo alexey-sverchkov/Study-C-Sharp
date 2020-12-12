@@ -361,4 +361,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 FileStorageConsole/.idea/
-FileStorageConsole/src/Labs.FileStorage.Console/lib/
+**/lib/
