@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Labs.FileStorage.Console.Business.Domain.Files;
+using Labs.FileStorage.Console.Domain.Files;
 
-namespace Labs.FileStorage.Console.Business.Data.Files
+namespace Labs.FileStorage.Console.Data.Files
 {
     public class Database
     {

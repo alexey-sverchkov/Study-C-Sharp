@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Labs.FileStorage.Console.Business.Domain.Users
+namespace Labs.FileStorage.Console.Domain.Users
 {
     public class User
     {

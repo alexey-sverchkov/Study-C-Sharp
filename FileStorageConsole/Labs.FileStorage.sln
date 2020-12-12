@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Labs.FileStorage.Console.Ya
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Labs.FileStorage.Console.Domain", "src\Labs.FileStorage.Console.Domain\Labs.FileStorage.Console.Domain.csproj", "{5E1B60E6-3366-4035-B8ED-C27931C89E1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labs.FileStorage.Console.Data", "src\Labs.FileStorage.Console.Data\Labs.FileStorage.Console.Data.csproj", "{40C6DDD7-9DC8-4264-A408-0F1564BFCEFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Labs.FileStorage.Console.Data", "src\Labs.FileStorage.Console.Data\Labs.FileStorage.Console.Data.csproj", "{40C6DDD7-9DC8-4264-A408-0F1564BFCEFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labs.FileStorage.Console.UI", "src\Labs.FileStorage.Console.UI\Labs.FileStorage.Console.UI.csproj", "{C8F418F3-BA51-42F6-9127-F87C09450762}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{40C6DDD7-9DC8-4264-A408-0F1564BFCEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40C6DDD7-9DC8-4264-A408-0F1564BFCEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40C6DDD7-9DC8-4264-A408-0F1564BFCEFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8F418F3-BA51-42F6-9127-F87C09450762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8F418F3-BA51-42F6-9127-F87C09450762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8F418F3-BA51-42F6-9127-F87C09450762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8F418F3-BA51-42F6-9127-F87C09450762}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="src\appsettings.json" />
-    <Content Include="src\appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <ProjectReference Include="..\Labs.FileStorage.Console.Data\Labs.FileStorage.Console.Data.csproj" />
     <ProjectReference Include="..\Labs.FileStorage.Console.Domain\Labs.FileStorage.Console.Domain.csproj" />
   </ItemGroup>

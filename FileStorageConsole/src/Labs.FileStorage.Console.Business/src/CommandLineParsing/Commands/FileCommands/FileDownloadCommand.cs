@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using Labs.FileStorage.Console.Business.Domain.Exceptions;
-using Labs.FileStorage.Console.Business.Domain.Files;
+using Labs.FileStorage.Console.Domain.Exceptions;
+using Labs.FileStorage.Console.Domain.Files;
 
 namespace Labs.FileStorage.Console.Business.CommandLineParsing.Commands.FileCommands
 {
