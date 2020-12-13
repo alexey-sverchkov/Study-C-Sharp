@@ -3,7 +3,8 @@ SELECT TOP (8) * FROM AdventureWorks2017.HumanResources.Department
 ORDER BY Name DESC;
 
 --- 2.
-SELECT * FROM AdventureWorks2017.HumanResources.Employee
+SELECT NationalIDNumber, BusinessEntityID, JobTitle, BirthDate, HireDate
+FROM AdventureWorks2017.HumanResources.Employee
 WHERE 
 -- case, when year of delta datetime = 22
 (SELECT DATEDIFF(YEAR, BirthDate, HireDate) AS DiffDate) = 22 
@@ -12,7 +13,8 @@ OR
 (SELECT DATEDIFF(YEAR, BirthDate, DATEFROMPARTS( YEAR(HireDate), 12, 31 ))) = 22;  
 
 --- 3.
-SELECT * FROM AdventureWorks2017.HumanResources.Employee
+SELECT BusinessEntityID, NationalIDNumber, JobTitle, BirthDate, MaritalStatus
+FROM AdventureWorks2017.HumanResources.Employee
 WHERE MaritalStatus = 'M' 
 AND
 JobTitle IN ('Design Engineer', 'Tool Designer', 'Engineering Manager', 'Production Control Manager')
@@ -20,7 +22,8 @@ ORDER BY BirthDate ASC;
 
 
 --- 4.
-SELECT * FROM AdventureWorks2017.HumanResources.Employee
+SELECT BusinessEntityID, JobTitle, Gender, BirthDate, HireDate
+FROM AdventureWorks2017.HumanResources.Employee
 WHERE DAY(HireDate) = 5 AND MONTH(HireDate) = 3
 ORDER BY BusinessEntityID ASC
 	OFFSET 1 ROW
@@ -35,10 +38,9 @@ GO
 SELECT * FROM AdventureWorks2017.HumanResources.Employee
 WHERE Gender = 'F' 
 AND
-DATEPART(DW, HireDate) = 2;
+DATENAME(WEEKDAY, HireDate) = 'Wednesday';
 
 --- 6.
-SELECT * FROM AdventureWorks2017.HumanResources.Employee;
 SELECT SUM(VacationHours) AS VacationSumInHours, SUM(SickLeaveHours) AS SicknessSumInHours 
 FROM AdventureWorks2017.HumanResources.Employee;
 
